@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jul 24 17:01:01 2016
+
+@author: Jan
+"""
+
+from core import *
+import yaml
+
+
+x = field(20,20)
+x.make_unaccessable(2,2)
+yaml.dump(x, open("data/fields/field1.yaml", "w"))
+
+
+y = tower("Laser Tower", 5, 4, 6, 7)
+yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
+z = tower("Small Tower", 2, 2, 2, 2)
+yaml.dump(z, open("data/towers/small_tower.yaml", "w"))
+
+a = attacker("Goblin", 5, 1, 1)
+yaml.dump(a, open("data/attacker/goblin.yaml", "w"))
+b = attacker("Orc", 2, 5, 5)
+yaml.dump(b, open("data/attacker/orc.yaml", "w"))
+
+c = level(["data/towers/laser_tower.yaml"], "data/fields/field1.yaml", [wave(1, {5: "data/attacker/goblin.yaml"}), wave(2, {3: "data/attacker/goblin.yaml", 2: "data/attacker/orc.yaml"})])
+yaml.dump(c, open("data/levels/1.yaml", "w"))

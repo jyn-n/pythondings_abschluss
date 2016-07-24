@@ -1,0 +1,10 @@
+!!python/object:core.level.level
+field: data/fields/field1.yaml
+towers: [data/towers/laser_tower.yaml]
+waves:
+- !!python/object:core.wave.wave
+  attacker: {5: data/attacker/goblin.yaml}
+  time: 1
+- !!python/object:core.wave.wave
+  attacker: {2: data/attacker/orc.yaml, 3: data/attacker/goblin.yaml}
+  time: 2

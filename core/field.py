@@ -91,10 +91,6 @@ class field:
 		
 
 		
-"""
-x = open("field.yaml", "r")
-b = yaml.load(x)
-b.foo()"""
 
 
 
