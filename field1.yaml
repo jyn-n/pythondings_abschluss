@@ -1,0 +1,36 @@
+!!python/object:__main__.field
+_tiles:
+  ? !!python/tuple [0, 0]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [0, 1]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [0, 2]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [1, 0]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [1, 1]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [1, 2]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [2, 0]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [2, 1]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [2, 2]
+  : !!python/object:__main__.tile {_accessable: false, _buildable: true, _tower: null}
+  ? !!python/tuple [3, 0]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [3, 1]
+  : !!python/object:__main__.tile
+    _accessable: true
+    _buildable: true
+    _tower: !!python/object:__main__.tower {attack_range: '', damage: '', fire_rate: '',
+      money: '', name: ''}
+  ? !!python/tuple [3, 2]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [4, 0]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [4, 1]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
+  ? !!python/tuple [4, 2]
+  : !!python/object:__main__.tile {_accessable: true, _buildable: true, _tower: null}
