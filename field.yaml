@@ -1,0 +1,4 @@
+!!python/object:__main__.field
+bla: dickfisch
+fd: !!python/object:tower.tower {attack_range: sf, damage: sf, fire_rate: sf<as, money: sdf,
+  name: df}
