@@ -4,7 +4,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
-from .data import attacker
+from .data import *
 import yaml
 class game:
 	def __init__(self):
@@ -37,3 +37,13 @@ class game:
 				self.attacker[self.current_attacker_id] = attacker(enemy, pos)
 				self.current_attacker_id += 1
 				
+	
+	def move_attackers(self):
+		for i in self.attacker:
+			self.attacker[i].progress += self.attacker[i].attacker_type.speed
+			while self.attacker[i].progress >= distance:
+				self.attacker[i].progress = self.attacker[i].progress - distance
+				dx = self.field[self.attacker[i].position[0], self.attacker[i].position[1]].next_tile[0]
+				dy = self.field[self.attacker[i].position[0], self.attacker[i].position[1]].next_tile[1]
+				self.attacker[i].position = (self.attacker[i].position[0] + dx, self.attacker[i].position[1] + dy)
+				#print(self.attacker[i].position)

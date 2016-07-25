@@ -11,6 +11,7 @@ class tile:
 		self._accessible = True
 		self._buildable = True
 		self._tower = None
+		self.next_tile = (1,0)
 		
 	def add_tower(self, tower):
 		if self._tower == None:
