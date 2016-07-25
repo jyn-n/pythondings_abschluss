@@ -3,9 +3,7 @@
 from core import game
 g = game()
 
-import os
-os.chdir ("gui")
-from gui import main_window
+from main_window import main_window
 
 app = QtGui.QApplication(sys.argv)
 mw = main_window()
