@@ -1,9 +1,9 @@
 #!/bin/python
 
 from core import game
+from main_window import main_window
 g = game()
 
-from main_window import main_window
 
 app = QtGui.QApplication(sys.argv)
 mw = main_window()
