@@ -2,41 +2,44 @@ from PyQt4 import QtGui, QtCore
 Qt = QtCore.Qt
 
 import itertools
+import math
 
 class GameBoardWidget (QtGui.QFrame):
 
 	def __init__ ( self, parent = None ):
 		super().__init__(parent)
+		self._board = dict()
+		self._position = (0,0)
 
-	def update_board ( board ):
+	def update_board ( self, board ):
 		self._board = board
 
+	def update_position ( self, position ):
+		self._position = position
+
 	def tile_size ( self ):
-		return ( int(self.width() / self.board_dimension()[0]) , int(self.height()) / self.board_dimension()[1] )
+		return ( math.floor(self.width() / self.board_dimension()[0]) , math.floor(self.height() / self.board_dimension()[1]) )
 
 	def tile_position ( self, position ):
-		return list(map ( lambda x,y: x * y, self.tile_size(), position ))
+		return ( x * y for (x,y) in zip (self.tile_size(), position) )
 
 	def board_dimension ( self ):
-		return ( int(self.width() / 10), int(self.height() / 10) ) #TODO
+		return ( math.floor(self.width() / 30), math.floor(self.height() / 30) ) #TODO
 
-	def paint_board ( self, board, position ):
+	def paint_board ( self ):
 		painter = QtGui.QPainter ( self )
-		for p in itertools.product ( *map (range, self.board_dimension())):
-			self.paint_tile ( painter, board[p], p ) #TODO
+		for p in itertools.product ( *( range(min(x,z), min(x+y, z)) for (x,y,z) in zip (self._position, self.board_dimension(), board.size()) ) ):
+			self.paint_tile ( painter, self._board[p], ( (dv - v) for (dv, v) in zip ( p , self._position ) ) ) #TODO
 		painter.end()
 
 	def paint_tile ( self, painter, tile, position):
-		painter.fillRect ( *self.tile_position ( position ) , *self.tile_size() , self.get_color ( tile ) )
+		painter.fillRect ( *self.tile_position ( position ) , *self.tile_size() , self.get_brush ( tile ) )
  
 	@staticmethod
-	def get_color ( tile ):
-		return Qt.blue #TODO
+	def get_brush ( tile ):
+		return { 0:Qt.blue, 1:Qt.green, 2:Qt.red, 3:Qt.yellow }[tile] #TODO
 
 	def paintEvent ( self, event ):
 		super().paintEvent(event)
-		print ("foo")
-		board = dict()
-		for p in itertools.product (range(1000), range(1000)): board[p] = 0 #TODO
-		self.paint_board (board, (0,0))
+		self.paint_board ()
 

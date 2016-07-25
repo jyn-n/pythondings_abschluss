@@ -14,6 +14,8 @@ class main_window ( window_base_class, ui_main_window ):
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
 	mw = main_window()
+	mw.board.update_board ({ (x,y) : x % 2 + 2 * (y % 2) for x in range(1000) for y in range (1000) })
+	mw.board.update_position ((997,997))
 	mw.show()
 	sys.exit(app.exec_())
 
