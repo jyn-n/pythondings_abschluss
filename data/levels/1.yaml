@@ -4,5 +4,7 @@ towers: [data/towers/laser_tower.yaml]
 waves:
   1: !!python/object:core.wave.wave
     attacker: {Goblin: 5}
+    spawn_point: 0
   2: !!python/object:core.wave.wave
     attacker: {Goblin: 3, Orc: 2}
+    spawn_point: 0
