@@ -7,8 +7,9 @@ Created on Mon Jul 25 16:25:11 2016
 from core import *
 class attacker:
 	def __init__(self, attacker_type, position):
-		self.attacker_type = attacker_type
+		self._attacker_type = attacker_type
 		self._hp = self.attacker_type.hp
+		self.name = self._attacker_type.name
 		self.position = position
 		self.progress = 0
 		
