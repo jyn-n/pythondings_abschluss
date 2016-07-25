@@ -47,9 +47,11 @@ class tile:
 		
 
 class field:
-	def __init__(self, n, m):
+	def __init__(self, n, m, spawn_points, targets):
 		self._size = (n,m)
 		self._tiles = { (i,j) : tile() for i in range(n) for j in range(m) }
+		self.spawn_points = spawn_points #dict of spawn ponits (id: position)
+		self.targets = targets #list of positions
 
 	def __getitem__(self, v):
 		return self._tiles[v]

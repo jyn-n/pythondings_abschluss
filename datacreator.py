@@ -9,8 +9,8 @@ from core import *
 import yaml
 
 
-x = field(20,20)
-x.make_unaccessable(2,2)
+x = field(20,20, {0:(0,0)}, [(19,19)])
+x[2,2].make_unaccessible()
 yaml.dump(x, open("data/fields/field1.yaml", "w"))
 
 
@@ -19,9 +19,9 @@ yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
 z = tower("Small Tower", 2, 2, 2, 2)
 yaml.dump(z, open("data/towers/small_tower.yaml", "w"))
 
-a = attacker("Goblin", 5, 1, 1)
+a = attacker_type("Goblin", 5, 1, 1)
 yaml.dump(a, open("data/attacker/goblin.yaml", "w"))
-b = attacker("Orc", 2, 5, 5)
+b = attacker_type("Orc", 2, 5, 5)
 yaml.dump(b, open("data/attacker/orc.yaml", "w"))
 
 c = level(["data/towers/laser_tower.yaml"], "data/fields/field1.yaml", {1 : wave({"Goblin":5}), 2 : wave({"Goblin":3, "Orc":2})})
