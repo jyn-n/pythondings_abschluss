@@ -1,2 +1,2 @@
-!!python/object:core.data.tower.tower {attack_range: 5, damage: 7, fire_rate: 4, money: 6,
-  name: Laser Tower}
+!!python/object:core.data.tower.tower {attack_range: 5000, damage: 7, fire_rate: 4000,
+  money: 6, name: Laser Tower}

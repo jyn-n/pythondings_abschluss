@@ -14,7 +14,7 @@ x[2,2].make_unaccessible()
 yaml.dump(x, open("data/fields/field1.yaml", "w"))
 
 
-y = tower("Laser Tower", 5, 4, 6, 7)
+y = tower("Laser Tower", 5000, 4000, 6, 7)
 yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
 z = tower("Small Tower", 2, 2, 2, 2)
 yaml.dump(z, open("data/towers/small_tower.yaml", "w"))

@@ -6,6 +6,7 @@ Created on Sun Jul 24 16:52:00 2016
 """
 from .data import *
 import yaml
+import math
 class game:
 	def __init__(self):
 		pass
@@ -13,9 +14,10 @@ class game:
 	def load_level(self, level): #level is the path of the level file
 		lvl = yaml.load(open(level, "r"))
 		self.field = yaml.load(open(lvl.field, "r"))
-		self.towers = []
+		self.towers = {}
 		for x in lvl.towers:
-			self.towers.append(yaml.load(open(x, "r")))
+			twr = yaml.load(open(x, "r"))
+			self.towers[twr.name] = twr
 		self.waves = lvl.waves
 		
 		
@@ -25,6 +27,8 @@ class game:
 		self.current_attacker_id = 0
 		self.time = 0
 		
+	def place_tower(self, tower, pos):
+		self.field[pos[0], pos[1]].add_tower(self.towers[tower])
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -51,3 +55,12 @@ class game:
 		dx = self.field[x, y].next_tile[0] * self.attacker[i].progress
 		dy = self.field[x, y].next_tile[1] * self.attacker[i].progress
 		return (distance * x + dx, distance * y + dy)
+		
+	def attackers_in_range(self, pos1):
+		attir = []
+		for att in self.attacker:
+			pos2 = self.exact_position(att)
+			x = math.sqrt((pos1[0] * distance - pos2[0])**2 + (pos1[1] * distance - pos2[1])**2)
+			if x < self.field[pos1[0], pos1[1]].get_tower().attack_range:
+				attir.append(att)
+		return attir
