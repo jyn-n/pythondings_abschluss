@@ -1,10 +1,10 @@
-!!python/object:core.level.level
+!!python/object:core.data.level.level
 field: data/fields/field1.yaml
 towers: [data/towers/laser_tower.yaml]
 waves:
-  1: !!python/object:core.wave.wave
+  1: !!python/object:core.data.wave.wave
     attacker: {Goblin: 5}
     spawn_point: 0
-  2: !!python/object:core.wave.wave
+  2: !!python/object:core.data.wave.wave
     attacker: {Goblin: 3, Orc: 2}
     spawn_point: 0

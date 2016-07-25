@@ -4,7 +4,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
-from .__init__ import *
+from data import *
 import yaml
 class game:
 	def __init__(self):
