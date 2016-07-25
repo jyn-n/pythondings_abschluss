@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui, uic
-import sys
 
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
 
