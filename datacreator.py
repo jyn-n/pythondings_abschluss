@@ -24,5 +24,5 @@ yaml.dump(a, open("data/attacker/goblin.yaml", "w"))
 b = attacker("Orc", 2, 5, 5)
 yaml.dump(b, open("data/attacker/orc.yaml", "w"))
 
-c = level(["data/towers/laser_tower.yaml"], "data/fields/field1.yaml", [wave(1, {5: "data/attacker/goblin.yaml"}), wave(2, {3: "data/attacker/goblin.yaml", 2: "data/attacker/orc.yaml"})])
+c = level(["data/towers/laser_tower.yaml"], "data/fields/field1.yaml", {1 : wave({"Goblin":5}), 2 : wave({"Goblin":3, "Orc":2})})
 yaml.dump(c, open("data/levels/1.yaml", "w"))
