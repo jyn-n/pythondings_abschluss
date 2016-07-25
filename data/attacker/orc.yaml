@@ -1,0 +1,1 @@
+!!python/object:core.attacker.attacker {hp: 5, money: 5, name: Orc, speed: 2}

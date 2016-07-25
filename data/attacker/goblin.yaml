@@ -1,0 +1,1 @@
+!!python/object:core.attacker.attacker {hp: 1, money: 1, name: Goblin, speed: 5}
