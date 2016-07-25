@@ -15,3 +15,7 @@ for x in gg.attacker:
 gg.move_attackers()
 for x in gg.attacker:
 	print(x, gg.attacker[x].position)
+gg.move_attackers()
+print(gg.attacker[0].position)
+	
+print(gg.exact_position(0))

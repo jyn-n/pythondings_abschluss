@@ -41,9 +41,13 @@ class game:
 	def move_attackers(self):
 		for i in self.attacker:
 			self.attacker[i].progress += self.attacker[i].attacker_type.speed
-			while self.attacker[i].progress >= distance:
-				self.attacker[i].progress = self.attacker[i].progress - distance
-				dx = self.field[self.attacker[i].position[0], self.attacker[i].position[1]].next_tile[0]
-				dy = self.field[self.attacker[i].position[0], self.attacker[i].position[1]].next_tile[1]
-				self.attacker[i].position = (self.attacker[i].position[0] + dx, self.attacker[i].position[1] + dy)
-				#print(self.attacker[i].position)
+			pos = self.exact_position(i)
+			self.attacker[i].position = (pos[0] // distance, pos[1] // distance)
+			self.attacker[i].progress = self.attacker[i].progress % distance
+
+	def exact_position(self, i):
+		x = self.attacker[i].position[0]
+		y = self.attacker[i].position[1]
+		dx = self.field[x, y].next_tile[0] * self.attacker[i].progress
+		dy = self.field[x, y].next_tile[1] * self.attacker[i].progress
+		return (distance * x + dx, distance * y + dy)
