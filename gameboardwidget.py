@@ -37,7 +37,7 @@ class GameBoardWidget (QtGui.QFrame):
  
 	@staticmethod
 	def get_brush ( tile ):
-		if ( tile.has_tower() ) return Qt.black
+		if ( tile.has_tower() ): return Qt.black
 		return { ((True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
 
 	def paintEvent ( self, event ):
