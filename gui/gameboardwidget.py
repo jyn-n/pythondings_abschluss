@@ -29,7 +29,7 @@ class GameBoardWidget (QtGui.QFrame):
 	def paint_board ( self ):
 		painter = QtGui.QPainter ( self )
 		for p in itertools.product ( *( range(min(x,z), min(x+y, z)) for (x,y,z) in zip (self._position, self.board_dimension(), board.size()) ) ):
-			self.paint_tile ( painter, self._board[p], ( (dv - v) for (dv, v) in zip ( p , self._position ) ) ) #TODO
+			self.paint_tile ( painter, self._board[p], ( (dv - v) for (dv, v) in zip ( p , self._position ) ) )
 		painter.end()
 
 	def paint_tile ( self, painter, tile, position):
@@ -37,7 +37,8 @@ class GameBoardWidget (QtGui.QFrame):
  
 	@staticmethod
 	def get_brush ( tile ):
-		return { 0:Qt.blue, 1:Qt.green, 2:Qt.red, 3:Qt.yellow }[tile] #TODO
+		if ( tile.has_tower() ) return Qt.black
+		return { ((True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
 
 	def paintEvent ( self, event ):
 		super().paintEvent(event)

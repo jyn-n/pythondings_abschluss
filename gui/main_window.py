@@ -1,9 +1,7 @@
 from PyQt4 import QtCore, QtGui, uic
 import sys
-import itertools
 
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui")
-
 
 class main_window ( window_base_class, ui_main_window ):
 	def __init__ (self, parent = None):
@@ -11,11 +9,7 @@ class main_window ( window_base_class, ui_main_window ):
 		ui_main_window.__init__(self)
 		self.setupUi(self)
 
-if __name__ == "__main__":
-	app = QtGui.QApplication(sys.argv)
-	mw = main_window()
-	mw.board.update_board ({ (x,y) : x % 2 + 2 * (y % 2) for x in range(1000) for y in range (1000) })
-	mw.board.update_position ((997,997))
-	mw.show()
-	sys.exit(app.exec_())
+#if __name__ == "__main__":
+#	mw.board.update_board ({ (x,y) : x % 2 + 2 * (y % 2) for x in range(1000) for y in range (1000) })
+#	mw.board.update_position ((997,997))
 
