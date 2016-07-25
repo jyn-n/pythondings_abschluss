@@ -19,7 +19,7 @@ class game:
 		self.waves = lvl.waves
 		
 		
-		#TODO: load all attackers (dict name:object)
+		#TODO: load all attackers types (dict name:object)
 		self.attacker_type = None
 		self.attacker = {}
 		
