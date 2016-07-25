@@ -9,6 +9,6 @@ class level:
 	def __init__(self, towers, field, waves):
 		self.towers = towers #list of towers filenames
 		self.field = field
-		self.waves = waves #list of waves
+		self.waves = waves #dict of waves (time:wave)
 		
 	
