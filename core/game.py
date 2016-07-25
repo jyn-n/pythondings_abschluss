@@ -25,5 +25,5 @@ class game:
 		
 		self.time = 0
 		
-x = game()
-x.load_level("data/levels/1.yaml")
+	def spawn_wave(self, wave):
+		pass

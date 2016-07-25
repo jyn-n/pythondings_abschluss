@@ -11,4 +11,5 @@ class level:
 		self.field = field
 		self.waves = waves #dict of waves (time:wave)
 		
+		
 	
