@@ -8,7 +8,7 @@ Created on Sun Jul 24 15:21:45 2016
 
 class tile:
 	def __init__(self):
-		self._accessable = True
+		self._accessible = True
 		self._buildable = True
 		self._tower = None
 		
@@ -27,23 +27,23 @@ class tile:
 	def get_tower(self):
 		return self._tower
 		
-	def is_accessable(self):
-		return self._accessable and not self.has_tower()
+	def is_accessible(self):
+		return self._accessible and not self.has_tower()
 		
 	def is_buildable(self):
 		return self._buildable and not self.has_tower()
 		
-	def make_accessable(self):
-		self._accessable = True
+	def make_accessible(self):
+		self._accessible = True
 		
 	def make_buildable(self):
 		self._buildable = True
 		
-	def make_unaccessable(self):
-		self._accessable = False
+	def make_unaccessible(self):
+		self._accessible = False
 		
 	def make_unbuildable(self):
-		self._buildsable = False
+		self._buildable = False
 		
 
 class field:
