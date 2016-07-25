@@ -4,7 +4,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
-from data import *
+from data import attacker
 import yaml
 class game:
 	def __init__(self):
@@ -20,10 +20,11 @@ class game:
 		
 		
 		#TODO: load all attackers types (dict name:object)
-		self.attacker_type = None
+		self.attacker_type = {"Goblin":yaml.load(open("data/attacker/goblin.yaml", "r"))}
 		self.attacker = {}
 		self.current_attacker_id = 0
 		self.time = 0
+		
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -35,3 +36,5 @@ class game:
 			for x in range(wave.attacker[name]):
 				self.attacker[self.current_attacker_id] = attacker(enemy, pos)
 				self.current_attacker_id += 1
+				
+print(attacker)
