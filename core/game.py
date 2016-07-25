@@ -4,7 +4,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
-from data import attacker
+from .data import attacker
 import yaml
 class game:
 	def __init__(self):
@@ -37,4 +37,3 @@ class game:
 				self.attacker[self.current_attacker_id] = attacker(enemy, pos)
 				self.current_attacker_id += 1
 				
-print(attacker)
