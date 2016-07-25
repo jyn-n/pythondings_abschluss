@@ -4,7 +4,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
-import core
+from .__init__ import *
 import yaml
 class game:
 	def __init__(self):
@@ -22,8 +22,16 @@ class game:
 		#TODO: load all attackers types (dict name:object)
 		self.attacker_type = None
 		self.attacker = {}
-		
+		self.current_attacker_id = 0
 		self.time = 0
 		
 	def spawn_wave(self, wave):
-		pass
+		sp = wave.spawn_point
+		if sp not in self.field.spawn_points:
+			sp = 0
+		pos = self.field.spawn_points[sp]
+		for name in wave.attacker:
+			enemy = self.attacker_type[name]
+			for x in range(wave.attacker[name]):
+				self.attacker[self.current_attacker_id] = attacker(enemy, pos)
+				self.current_attacker_id += 1
