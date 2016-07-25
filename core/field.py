@@ -17,6 +17,7 @@ class tile:
 			self._tower = tower
 		else:
 			raise Exception("tower already present") 
+
 	def has_tower(self):
 		return not(self._tower == None)
 		
@@ -47,50 +48,18 @@ class tile:
 
 class field:
 	def __init__(self, n, m):
-		self._tiles = {}
-		for i in range(n):
-			for j in range(m):
-				self._tiles[i, j] = tile()
-				
-	def is_accessable(self, x, y):
-		return self._tiles[x, y].is_accessable()
-		
-	def is_buildable(self, x, y):
-		return self._tiles[x, y].is_buildable()
-		
-	def make_accessable(self, x, y):
-		self._tiles[x, y].make_accessable()
-		
-	def make_buildable(self, x, y):
-		self._tiles[x, y].make_buildable()
-		
-	def make_unaccessable(self, x, y):
-		self._tiles[x, y].make_unaccessable()
-		
-	def make_unbuildable(self, x, y):
-		self._tiles[x, y].make_unbuildable()
-		
-	def add_tower(self, tower, x, y):
-		self._tiles[x, y].add_tower(tower)
-		
-	def delete_tower(self, x, y):
-		self._tiles[x, y].delete_tower()
-		
-	def has_tower(self, x, y):
-		return self._tiles[x, y].has_tower()
-	
-	def get_tower(self, x, y):
-		return self._tiles[x,y].get_tower()
-		
+		self._size = (n,m)
+		self._tiles = { (i,j) : tile() for i in range(n) for j in range(m) }
+
+	def __getitem__(self, v):
+		return self._tiles[v]
+
+	def size (self):
+		return self._size
+
+	def __iter__(self):
+		return self._tiles.__iter__()
+
 	def get_towers(self):
-		x = {}
-		for a in _tiles:
-			if has_tower(a[0],a[1]):
-				x[a] = get_tower(a[0],a[1])
-			
-		
-
-		
-
-
+		return { t : self[t].get_tower() for t in self if self[t].has_tower() }
 
