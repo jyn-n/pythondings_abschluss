@@ -8,7 +8,16 @@ class main_window ( window_base_class, ui_main_window ):
 		ui_main_window.__init__(self)
 		self.setupUi(self)
 
-#if __name__ == "__main__":
-#	mw.board.update_board ({ (x,y) : x % 2 + 2 * (y % 2) for x in range(1000) for y in range (1000) })
-#	mw.board.update_position ((997,997))
+	def init_game (self, game ):
+		self._game = game
+		for t in game.attacker_type:
+			self.list_attacker_types.addItem (t)
+		self.list_attacker_types.setCurrentRow(0)
+
+	def select_attacker_type (self, row):
+		t = str(self.list_attacker_types.item(row).text())
+		self.label_attacker_type_name.setText ( self._game.attacker_type[t].name )
+		self.label_attacker_type_speed.setText ( str (self._game.attacker_type[t].speed ) )
+		self.label_attacker_type_money.setText ( str (self._game.attacker_type[t].money ) )
+		self.label_attacker_type_hp.setText ( str (self._game.attacker_type[t].hp ) )
 
