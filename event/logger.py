@@ -10,6 +10,6 @@ class logger:
 			return nothing
 
 		def log (*args, **kwargs):
-			print ('[[ ' + log_level + ' ]]  ', *args, **kwargs)
+			print ('[[', log_level, ']] ', *args, **kwargs)
 
 		return log

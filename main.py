@@ -11,7 +11,7 @@ import sys
 
 #init objects
 
-l = logger(log.error, log.warning)
+l = logger(log.error, log.warning, log.event)
 e = event_manager(l)
 g = game(e)
 
