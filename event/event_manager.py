@@ -9,5 +9,6 @@ class event_manager:
 
 	def __call__ (self, name, *params):
 		for f in self.events [name]:
-			f(*params)
+			a = f(*params)
+		return a
 

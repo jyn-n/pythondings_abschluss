@@ -1,4 +1,5 @@
 from PyQt4 import QtCore, QtGui, uic
+import functools
 
 import core.data.events as events
 
@@ -15,16 +16,21 @@ class main_window ( window_base_class, ui_main_window ):
 			self.init_gamestate(gamestate)
 
 		self._timer = QtCore.QTimer()
-		self._timer.setInterval(interval)
+		self._timer.start(interval)
+		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
 
 	def set_event_callback (self, callback):
 		self._event = callback
 
 	def init_gamestate (self, gamestate):
 		self.board.update_gamestate(gamestate)
+
 		for tower in gamestate.towers:
 			self.list_towers.addItem (tower)
 
+	def update_gamestate (self, gamestate):
+		self.board.update_gamestate(gamestate)
+		self.repaint()
+
 	def game_board_clicked (self, position):
-		print ("click!")
 		self._event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , (position.x(), position.y()) ) 
