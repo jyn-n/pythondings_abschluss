@@ -14,8 +14,8 @@ g = game(e)
 
 #create ticking method
 def tick():
-	mw.board.update_gamestate(g.tick())
-	mw.repaint()
+	#print ("tick")
+	mw.update_gamestate(g.tick())
 
 #register events
 
@@ -41,12 +41,13 @@ del r
 #testing stuff
 
 e ( events.load_level, "data/levels/1.yaml" )
+e (events.place_tower, "Laser Tower", (6,0))
+e (events.spawn_attacker, "Goblin", (0,0))
 
-"""
 #create main window
 app = QtGui.QApplication(sys.argv)
 mw = main_window(event_callback = e, gamestate = g, interval = 20)
 mw.show()
 e(events.tick)
 sys.exit(app.exec_())
-"""
+
