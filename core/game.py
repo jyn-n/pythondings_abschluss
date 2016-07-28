@@ -8,7 +8,8 @@ from .data import *
 import yaml
 import math
 class game:
-	def __init__(self):
+	def __init__(self, event):
+		self.event = event
 		pass
 	
 	def load_level(self, level): #level is the path of the level file
@@ -36,31 +37,38 @@ class game:
 			sp = 0
 		pos = self.field.spawn_points[sp]
 		for name in wave.attacker:
-			enemy = self.attacker_type[name]
 			for x in range(wave.attacker[name]):
-				self.attacker[self.current_attacker_id] = attacker(enemy, pos)
-				self.current_attacker_id += 1
+				self.event(events.spawn, name, pos)
+				
+				
+	def spawn_attacker(self, name, pos):
+		enemy = self.attacker_type[name]
+		self.attacker[self.current_attacker_id] = attacker(enemy, pos)
+		self.current_attacker_id += 1
 				
 	
-	def move_attackers(self):
-		for i in self.attacker:
-			self.attacker[i].progress += self.attacker[i].attacker_type.speed
-			pos = self.exact_position(i)
-			self.attacker[i].position = (pos[0] // distance, pos[1] // distance)
-			self.attacker[i].progress = self.attacker[i].progress % distance
+	def move_attacker(self, i):
+		self.attacker[i].progress += self.attacker[i].attacker_type.speed
+		pos = self.exact_position(i)
+		self.attacker[i].position = (pos[0] // constants.distance, pos[1] // constants.distance)
+		self.attacker[i].progress = self.attacker[i].progress % constants.distance
 
+	def move_all_attackers(self):
+		for i in self.attacker:
+			self.event(events.move, i)
+			
 	def exact_position(self, i):
 		x = self.attacker[i].position[0]
 		y = self.attacker[i].position[1]
 		dx = self.field[x, y].next_tile[0] * self.attacker[i].progress
 		dy = self.field[x, y].next_tile[1] * self.attacker[i].progress
-		return (distance * x + dx, distance * y + dy)
+		return (constants.distance * x + dx, constants.distance * y + dy)
 		
 	def attackers_in_range(self, pos1):
 		attir = []
 		for att in self.attacker:
 			pos2 = self.exact_position(att)
-			x = math.sqrt((pos1[0] * distance - pos2[0])**2 + (pos1[1] * distance - pos2[1])**2)
+			x = math.sqrt((pos1[0] * constants.distance - pos2[0])**2 + (pos1[1] * constants.distance - pos2[1])**2)
 			if x < self.field[pos1[0], pos1[1]].get_tower().attack_range:
 				attir.append(att)
 		return attir
