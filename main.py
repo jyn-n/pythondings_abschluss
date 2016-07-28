@@ -15,6 +15,8 @@ g = game(e)
 
 #testing stuff
 
+g.load_level ("data/levels/1.yaml")
+
 #create main window
 
 app = QtGui.QApplication(sys.argv)
