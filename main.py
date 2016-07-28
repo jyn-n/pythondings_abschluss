@@ -14,7 +14,6 @@ g = game(e)
 
 #create ticking method
 def tick():
-	print ("tick")
 	mw.update_gamestate(g.tick())
 
 #register events
