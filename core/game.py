@@ -35,7 +35,12 @@ class game:
 		self.life = lvl.life
 		
 	def place_tower(self, tower, pos):
-		self.field[pos[0], pos[1]].add_tower(self.towers[tower])
+		atpl = True
+		for x in self.attacker:
+			if self.attacker[x].position == pos:
+				atpl = False
+		if self.field[pos[0], pos[1]].is_buildable() and atpl:
+			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -95,7 +100,7 @@ class game:
 		if self.field[pos[0], pos[1]].has_tower():
 			twr = self.field[pos[0], pos[1]].get_tower()
 			attir = self.attackers_in_range(pos)
-			if len(attir > 0):
+			if len(attir) > 0:
 				for i in range(twr.fire_rate):
 					rand = random.randrange(len(attir))
 					self.event(events.take_damage, attir[i], twr.game)
