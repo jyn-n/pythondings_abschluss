@@ -137,7 +137,7 @@ class game:
 		temp = {}
 		i = 1
 		for x in self.field.targets:
-			temp[x[0], x[1]] = 0
+			temp[0] = x
 		while False:
 			pass
 			
