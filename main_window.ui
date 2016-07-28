@@ -45,6 +45,16 @@
    <property name="title">
     <string>GroupBox</string>
    </property>
+   <widget class="QListWidget" name="list_towers">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>

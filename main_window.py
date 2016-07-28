@@ -7,3 +7,7 @@ class main_window ( window_base_class, ui_main_window ):
 		window_base_class.__init__(self, parent)
 		ui_main_window.__init__(self)
 		self.setupUi(self)
+
+	def set_event_callback (self, callback):
+		self.event = callback
+		self.board.set_event_callback (self, callback):
