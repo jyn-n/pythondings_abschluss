@@ -17,11 +17,13 @@ g = game(e)
 r = e.register_event
 
 r ( events.spawn_attacker, g.spawn_attacker )
-r ( events.move, g.move_attacker )
+r ( events.move, g.move )
 r ( events.load_level, g.load_level )
 r ( events.place_tower, g.place_tower )
 r ( events.spawn_wave, g.spawn_wave )
-r ( events.move_all, g.move_all_attackers )
+r ( events.move_all, g.move_all )
+r ( events.die, g.die)
+r ( events.take_damage, g.take_damage)
 
 del r
 
