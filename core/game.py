@@ -72,3 +72,8 @@ class game:
 			if x < self.field[pos1[0], pos1[1]].get_tower().attack_range:
 				attir.append(att)
 		return attir
+
+		
+	def die(self, i):
+		pass
+
