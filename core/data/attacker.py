@@ -18,4 +18,4 @@ class attacker:
 		
 	def take_damage(self, dmg):
 		self._hp -= dmg
-		return self._hp >= 0
+		return self._hp <= 0

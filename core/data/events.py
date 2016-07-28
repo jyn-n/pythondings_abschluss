@@ -11,3 +11,4 @@ load_level = "load level" #path of the level file
 place_tower = "place tower" #name of the tower, position
 spawn_wave = "spawn wave" #wave
 move_all = "move all" #
+die = "die" #id of the attacker

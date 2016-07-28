@@ -75,5 +75,9 @@ class game:
 
 		
 	def die(self, i):
-		pass
+		del self.attacker[i]
+		
+	def take_damage(self, i, amount):
+		if self.attacker[i].take_damage:
+			self.event(events.die, i)
 
