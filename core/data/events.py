@@ -13,3 +13,5 @@ spawn_wave = "spawn wave" #wave
 move_all = "move all" #
 die = "die" #id of the attacker
 take_damage = "take damage" #id of the attacker, amount of damage
+fire_tower = "fire tower" #position
+fire_all = "fire all" #

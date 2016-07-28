@@ -89,4 +89,9 @@ class game:
 			for i in range(twr.fire_rate):
 				rand = random.randrange(len(attir))
 				self.event(events.take_damage, attir[i], twr.game)
+				
+	def fire_all(self):
+		for x in self.field:
+			if self.field[x].has_tower:
+				self.event(events.fire_tower, x)
 
