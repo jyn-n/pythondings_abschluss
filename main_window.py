@@ -10,4 +10,4 @@ class main_window ( window_base_class, ui_main_window ):
 
 	def set_event_callback (self, callback):
 		self.event = callback
-		self.board.set_event_callback (self, callback):
+		self.board.set_event_callback (self, callback)
