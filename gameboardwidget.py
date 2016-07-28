@@ -55,7 +55,7 @@ class GameBoardWidget (QtGui.QFrame):
 	def paint_attacker ( self, painter, attacker ):
 		position = attacker_position ( self._gamestate.exact_position ( attacker ) )
 		painter.setColor (QtCore.Qt.pink)
-		painter.drawEllipse(QtCore.QPointF ( *position , 5, 5 ) ) #TODO
+		painter.drawEllipse(QtCore.QPointF ( position[0], position[1] , 5, 5 ) ) #TODO
 
 	def paint_attackers ( self, painter ):
 		for attacker in self._gamestate.attacker:
