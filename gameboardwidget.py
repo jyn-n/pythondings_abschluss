@@ -28,8 +28,11 @@ class GameBoardWidget (QtGui.QFrame):
 	def tile_position ( self, position ):
 		return ( x * y for (x,y) in zip (self.tile_size(), position) )
 
-	def pos_to_tile_coords ( self, position ):
-		return map ( lambda x,sx: math.floor ( x / sx ), position, self.tile_size() )
+	def tile_coords ( self, position ):
+		r = tuple ( x + dx for (x,dx) in zip ( map ( lambda x,sx: math.floor ( x / sx ), position, self.tile_size() ) , self._position ) )
+		for (x,max_x) in zip (r, self._gamestate.field.size()):
+			if x >= max_x: return None
+		return r
 
 	def board_dimension ( self ):
 		return ( math.floor(self.width() / 30), math.floor(self.height() / 30) ) #TODO
@@ -54,5 +57,6 @@ class GameBoardWidget (QtGui.QFrame):
 
 	def mousePressEvent ( self, event ):
 		if (event.button() != QtCore.Qt.LeftButton): return
+		print ("clicked on board at pos", str ( self.tile_coords ( (event.pos().x(), event.pos().y()) ) ) )
 		#self.event ( events.place_tower
 
