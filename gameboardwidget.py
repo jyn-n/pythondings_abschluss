@@ -41,7 +41,7 @@ class GameBoardWidget (QtGui.QFrame):
 		painter.end()
 
 	def paint_tile ( self, painter, tile, position):
-		painter.fillRect ( *(self.tile_position ( position ) + self.tile_size()) , self.get_brush ( tile ) ) #this + is unnessecary as of python 3.5.2 (or maybe earlier), just use a second * instead
+		painter.fillRect ( *(self.tile_position ( position ) + self.tile_size()) + (self.get_brush ( tile ),) ) #this + is unnessecary as of python 3.5.2 (or maybe earlier), just use a second * instead
  
 	@staticmethod
 	def get_brush ( tile ):
