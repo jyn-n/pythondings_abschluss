@@ -4,13 +4,14 @@ from core import game
 from main_window import main_window
 from event import event_manager
 from event import logger
+from event import log
 import core.data.events as events
 from PyQt4 import QtGui
 import sys
 
 #init objects
 
-l = logger('events')
+l = logger(log.error, log.warning)
 e = event_manager(l)
 g = game(e)
 
