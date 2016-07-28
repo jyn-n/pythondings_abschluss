@@ -58,5 +58,5 @@ class GameBoardWidget (QtGui.QFrame):
 	def mousePressEvent ( self, event ):
 		if (event.button() != QtCore.Qt.LeftButton): return
 		print ("clicked on board at pos", str ( self.tile_coords ( (event.pos().x(), event.pos().y()) ) ) )
-		#self.event ( events.place_tower
+		self.event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , self.tile_coords ( (event.pos().x(), event.pos().y()) ) )
 
