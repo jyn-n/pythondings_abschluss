@@ -38,7 +38,7 @@ class game:
 		pos = self.field.spawn_points[sp]
 		for name in wave.attacker:
 			for x in range(wave.attacker[name]):
-				self.event(events.spawn, name, pos)
+				self.event(events.spawn_attacker, name, pos)
 				
 				
 	def spawn_attacker(self, name, pos):
@@ -72,6 +72,8 @@ class game:
 			if x < self.field[pos1[0], pos1[1]].get_tower().attack_range:
 				attir.append(att)
 		return attir
+
 		
 	def die(self, i):
 		pass
+
