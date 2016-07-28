@@ -1,14 +1,17 @@
 class event_manager:
-	def __init__(self):
-		self.events = dict()
+	def __init__(self, logger):
+		self._events = dict()
+		self._logger = logger
 
 	def register_event (self, name, callback):
-		if not name in self.events:
-			self.events[name] = tuple()
-		self.events[name] += (callback,)
+		self._logger('events')("registering", callback.__name__, "to <<", name, ">>")
+		if not name in self._events:
+			self._events[name] = tuple()
+		self._events[name] += (callback,)
 
 	def __call__ (self, name, *params):
-		for f in self.events [name]:
+		self._logger('events')("calling <<", name, ">> with:", *map (str, params))
+		for f in self._events [name]:
 			a = f(*params)
 		return a
 
