@@ -45,98 +45,6 @@
    <property name="title">
     <string>GroupBox</string>
    </property>
-   <widget class="QWidget" name="widget_2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>280</y>
-      <width>696</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QListWidget" name="listWidget"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QWidget" name="widget" native="true">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="attacker_type_view">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Name</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_attacker_type_name">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Max Life</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="label_attacker_type_hp">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Speed</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_attacker_type_speed">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Money</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="label_attacker_type_money">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QListWidget" name="list_attacker_types"/>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
-   </widget>
   </widget>
  </widget>
  <customwidgets>
@@ -148,24 +56,7 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>list_attacker_types</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>Form</receiver>
-   <slot>select_attacker_type(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>303</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>3</x>
-     <y>652</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>select_attacker_type(int)</slot>
  </slots>
