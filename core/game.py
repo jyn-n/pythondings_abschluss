@@ -47,10 +47,10 @@ class game:
 		sp = wave.spawn_point
 		if sp not in self.field.spawn_points:
 			sp = 0
-			pos = self.field.spawn_points[sp]
-			for name in wave.attacker:
-				for x in range(wave.attacker[name]):
-					self.event(events.spawn_attacker, name, pos)
+		pos = self.field.spawn_points[sp]
+		for name in wave.attacker:
+			for x in range(wave.attacker[name]):
+				self.event(events.spawn_attacker, name, pos)
 				
 				
 	def spawn_attacker(self, name, pos):
@@ -113,10 +113,10 @@ class game:
 				self.event(events.fire_tower, x)
 				
 	def tick(self):
+		#self.update_paths()
 		self.event(events.move_all)
-		self.event(events.fire_all)
-		if self.time in self.waves:
-			self.event(events.spawn_wave, self.waves[self.time])
+			if self.time in self.waves:
+		self.event(events.spawn_wave, self.waves[self.time])
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
@@ -132,5 +132,14 @@ class game:
 		if self.time <= max(self.waves.keys()):
 			x = False
 		return x
+		
+	def update_paths(self):
+		temp = {}
+		i = 1
+		for x in self.field.targets:
+			temp[x[0], x[1]] = 0
+		while False:
+			
+			
 		
 
