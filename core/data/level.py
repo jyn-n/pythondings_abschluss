@@ -10,6 +10,7 @@ class level:
 		self.towers = towers #list of towers filenames
 		self.field = field
 		self.waves = waves #dict of waves (time:wave)
+		self.lifes
 		
 		
 	
