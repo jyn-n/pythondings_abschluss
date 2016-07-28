@@ -7,6 +7,7 @@ Created on Sun Jul 24 16:52:00 2016
 
 from .data import *
 from .data import events as events
+from .data import constants as constants
 import yaml
 import math
 import random
@@ -93,17 +94,18 @@ class game:
 		del self.attacker[i]
 		
 	def take_damage(self, i, amount):
-		if self.attacker[i].take_damage:
+		print(self.attacker, i)
+		if self.attacker[i].take_damage(amount):
 			self.event(events.die, i)
 			
 	def fire_tower(self, pos):
 		if self.field[pos[0], pos[1]].has_tower():
 			twr = self.field[pos[0], pos[1]].get_tower()
-			attir = self.attackers_in_range(pos)
-			if len(attir) > 0:
-				for i in range(twr.fire_rate):
-					rand = random.randrange(len(attir))
-					self.event(events.take_damage, attir[i], twr.game)
+			for i in range(twr.fire_rate):
+				attir = self.attackers_in_range(pos)
+				if len(attir) > 0:
+					rand = random.choice(attir)
+					self.event(events.take_damage, rand, twr.damage)
 				
 	def fire_all(self):
 		for x in self.field:
