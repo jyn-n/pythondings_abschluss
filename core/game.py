@@ -115,8 +115,8 @@ class game:
 	def tick(self):
 		#self.update_paths()
 		self.event(events.move_all)
-			if self.time in self.waves:
-		self.event(events.spawn_wave, self.waves[self.time])
+		if self.time in self.waves:
+			self.event(events.spawn_wave, self.waves[self.time])
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
@@ -139,6 +139,7 @@ class game:
 		for x in self.field.targets:
 			temp[x[0], x[1]] = 0
 		while False:
+			pass
 			
 			
 		
