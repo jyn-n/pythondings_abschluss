@@ -7,9 +7,9 @@ Created on Mon Jul 25 16:25:11 2016
 #from .attacker_type import attacker_type
 class attacker:
 	def __init__(self, attacker_type, position):
-		self._attacker_type = attacker_type
-		self._hp = self._attacker_type.hp
-		self.name = self._attacker_type.name
+		self.attacker_type = attacker_type
+		self._hp = self.attacker_type.hp
+		self.name = self.attacker_type.name
 		self.position = position
 		self.progress = 0
 		
