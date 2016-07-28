@@ -12,6 +12,9 @@ import sys
 e = event_manager()
 g = game(e)
 
+
+#create ticking method
+
 #register events
 
 r = e.register_event
@@ -26,6 +29,10 @@ r ( events.die, g.die)
 r ( events.take_damage, g.take_damage)
 r ( events.fire_tower, g.fire_tower)
 r ( events.fire_all, g.fire_all)
+r ( events.tick, g.tick)
+r ( events.loose)
+r ( events.win)
+r (events.loose_life, g.loose_life)
 
 del r
 

@@ -4,11 +4,13 @@ Created on Sun Jul 24 16:52:00 2016
 
 @author: Jan
 """
+
 from .data import *
+from .data import events as events
 import yaml
 import math
 import random
-import data.events as events
+
 class game:
 	def __init__(self, event):
 		self.event = event
@@ -29,21 +31,19 @@ class game:
 		self.attacker = {}
 		self.current_attacker_id = 0
 		self.time = 0
-		self.lifes = lvl.lifes
+		self.life = lvl.life
 		
 	def place_tower(self, tower, pos):
 		self.field[pos[0], pos[1]].add_tower(self.towers[tower])
 		
-	def spawn_wave(self, time):
-		wave = self.waves[time]
-		if not wave==None:
-			sp = wave.spawn_point
-			if sp not in self.field.spawn_points:
-				sp = 0
-				pos = self.field.spawn_points[sp]
-				for name in wave.attacker:
-					for x in range(wave.attacker[name]):
-						self.event(events.spawn_attacker, name, pos)
+	def spawn_wave(self, wave):
+		sp = wave.spawn_point
+		if sp not in self.field.spawn_points:
+			sp = 0
+			pos = self.field.spawn_points[sp]
+			for name in wave.attacker:
+				for x in range(wave.attacker[name]):
+					self.event(events.spawn_attacker, name, pos)
 				
 				
 	def spawn_attacker(self, name, pos):
@@ -57,7 +57,7 @@ class game:
 		pos = self.exact_position(i)
 		self.attacker[i].position = (pos[0] // constants.distance, pos[1] // constants.distance)
 		self.attacker[i].progress = self.attacker[i].progress % constants.distance
-		for x in self.field.targets
+		for x in self.field.targets:
 			if self.attacker[i].position == x:
 				self.event(events.die, i)
 				self.event(events.loose_life, 1)
@@ -91,8 +91,8 @@ class game:
 			self.event(events.die, i)
 			
 	def fire_tower(self, pos):
-		if self.field[pos[0], pos[1]].has_tower:
-			twr = self.field[pos[0], pos[1]].get_tower
+		if self.field[pos[0], pos[1]].has_tower():
+			twr = self.field[pos[0], pos[1]].get_tower()
 			attir = self.attackers_in_range(pos)
 			for i in range(twr.fire_rate):
 				rand = random.randrange(len(attir))
@@ -100,21 +100,22 @@ class game:
 				
 	def fire_all(self):
 		for x in self.field:
-			if self.field[x].has_tower:
+			if self.field[x].has_tower():
 				self.event(events.fire_tower, x)
 				
 	def tick(self):
 		self.event(events.move_all)
 		self.event(events.fire_all)
-		if not self.waves[time]== None:
-			self.event(events.spawn_wave, self.time)
+		if self.time in self.waves:
+			self.event(events.spawn_wave, self.waves[self.time])
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
+		return self
 		
-	def loose_lifes(self, amount):
-		self.lifes -= amount
-		if self.lifes <= 0:
+	def loose_life(self, amount):
+		self.life -= amount
+		if self.life <= 0:
 			self.event(event.loose)
 			
 	def has_won(self):
