@@ -7,6 +7,7 @@ Created on Sun Jul 24 16:52:00 2016
 from .data import *
 import yaml
 import math
+import random
 class game:
 	def __init__(self, event):
 		self.event = event
@@ -47,13 +48,13 @@ class game:
 		self.current_attacker_id += 1
 				
 	
-	def move_attacker(self, i):
+	def move(self, i):
 		self.attacker[i].progress += self.attacker[i].attacker_type.speed
 		pos = self.exact_position(i)
 		self.attacker[i].position = (pos[0] // constants.distance, pos[1] // constants.distance)
 		self.attacker[i].progress = self.attacker[i].progress % constants.distance
 
-	def move_all_attackers(self):
+	def move_all(self):
 		for i in self.attacker:
 			self.event(events.move, i)
 			
@@ -80,4 +81,12 @@ class game:
 	def take_damage(self, i, amount):
 		if self.attacker[i].take_damage:
 			self.event(events.die, i)
+			
+	def fire_tower(self, pos):
+		if self.field[pos[0], pos[1]].has_tower:
+			twr = self.field[pos[0], pos[1]].get_tower
+			attir = self.attackers_in_range(pos)
+			for i in range(twr.fire_rate):
+				rand = random.randrange(len(attir))
+				self.event(events.take_damage, attir[i], twr.game)
 

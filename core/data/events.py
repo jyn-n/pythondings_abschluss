@@ -12,3 +12,4 @@ place_tower = "place tower" #name of the tower, position
 spawn_wave = "spawn wave" #wave
 move_all = "move all" #
 die = "die" #id of the attacker
+take_damage = "take damage" #id of the attacker, amount of damage
