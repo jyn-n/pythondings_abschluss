@@ -8,13 +8,12 @@ import math
 
 class GameBoardWidget (QtGui.QFrame):
 
+	click = QtCore.pyqtSignal(QtCore.QPoint)
+
 	def __init__ ( self, parent = None ):
 		super().__init__(parent)
 		self._gamestate = None
 		self._position = (0,0)
-
-	def set_event_callback ( self, callback ):
-		self.event = callback
 
 	def update_gamestate ( self, state ):
 		self._gamestate = state
@@ -55,8 +54,7 @@ class GameBoardWidget (QtGui.QFrame):
 		super().paintEvent(event)
 		self.paint_board ()
 
-	def mousePressEvent ( self, event ):
+	def mouseReleaseEvent ( self, event ):
 		if (event.button() != QtCore.Qt.LeftButton): return
-		print ("clicked on board at pos", str ( self.tile_coords ( (event.pos().x(), event.pos().y()) ) ) )
-		self.event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , self.tile_coords ( (event.pos().x(), event.pos().y()) ) )
+		self.click.emit (QtCore.QPoint(*self.tile_coords ( (event.pos().x(), event.pos().y()) ) ))
 

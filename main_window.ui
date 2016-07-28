@@ -63,11 +63,32 @@
    <extends>QFrame</extends>
    <header>gameboardwidget.h</header>
    <container>1</container>
+   <slots>
+    <signal>click(QPoint)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>board</sender>
+   <signal>click(QPoint)</signal>
+   <receiver>Form</receiver>
+   <slot>game_board_clicked(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>select_attacker_type(int)</slot>
+  <slot>game_board_clicked(QPoint)</slot>
  </slots>
 </ui>

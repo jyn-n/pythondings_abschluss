@@ -1,5 +1,7 @@
 from PyQt4 import QtCore, QtGui, uic
 
+import core.data.events as events
+
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
 
 class main_window ( window_base_class, ui_main_window ):
@@ -16,9 +18,13 @@ class main_window ( window_base_class, ui_main_window ):
 		self._timer.setInterval(interval)
 
 	def set_event_callback (self, callback):
-		self.event = callback
-		self.board.set_event_callback (callback)
+		self._event = callback
 
 	def init_gamestate (self, gamestate):
+		self.board.update_gamestate(gamestate)
 		for tower in gamestate.towers:
 			self.list_towers.addItem (tower)
+
+	def game_board_clicked (self, position):
+		print ("click!")
+		self._event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , (position.x(), position.y()) ) 
