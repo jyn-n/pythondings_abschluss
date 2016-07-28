@@ -68,7 +68,7 @@ class game:
 			if self.attacker[i].position == x:
 				self.event(events.die, i)
 				self.event(events.loose_life, 1)
-
+				
 	def move_all(self):
 		for i in self.attacker:
 			self.event(events.move, i)
@@ -94,7 +94,7 @@ class game:
 		del self.attacker[i]
 		
 	def take_damage(self, i, amount):
-		print(self.attacker, i)
+		print(self.attacker[i].get_hp(), self.exact_position(i))
 		if self.attacker[i].take_damage(amount):
 			self.event(events.die, i)
 			

@@ -3,18 +3,19 @@
 from core import game
 from main_window import main_window
 from event import event_manager
+from event import logger
 import core.data.events as events
 from PyQt4 import QtGui
 import sys
 
 #init objects
 
-e = event_manager()
+l = logger()
+e = event_manager(l)
 g = game(e)
 
 #create ticking method
 def tick():
-	#print ("tick")
 	mw.update_gamestate(g.tick())
 
 #register events
@@ -50,4 +51,7 @@ mw = main_window(event_callback = e, gamestate = g, interval = 20)
 mw.show()
 e(events.tick)
 sys.exit(app.exec_())
+
+
+
 
