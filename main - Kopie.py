@@ -12,8 +12,10 @@ import sys
 e = event_manager()
 g = game(e)
 
-
 #create ticking method
+def tick():
+	mw.board.update_gamestate(g.tick())
+	mw.repaint()
 
 #register events
 
@@ -25,13 +27,13 @@ r ( events.load_level, g.load_level )
 r ( events.place_tower, g.place_tower )
 r ( events.spawn_wave, g.spawn_wave )
 r ( events.move_all, g.move_all )
-r ( events.die, g.die)
-r ( events.take_damage, g.take_damage)
-r ( events.fire_tower, g.fire_tower)
-r ( events.fire_all, g.fire_all)
-r ( events.tick, g.tick)
-r ( events.loose)
-r ( events.win)
+r ( events.die, g.die )
+r ( events.take_damage, g.take_damage )
+r ( events.fire_tower, g.fire_tower )
+r ( events.fire_all, g.fire_all )
+r ( events.tick, tick)
+r ( events.loose, lambda: None)
+r ( events.win, lambda: None)
 r (events.loose_life, g.loose_life)
 
 del r
@@ -39,16 +41,12 @@ del r
 #testing stuff
 
 e ( events.load_level, "data/levels/1.yaml" )
-e ( events.spawn_attacker, "Goblin", (0,0))
-e ( events.place_tower, "Laser Tower", (1,0))
-e (events.fire_all)
-print(g.attackers[0].get_hp())
 
-#create main window
 """
+#create main window
 app = QtGui.QApplication(sys.argv)
-mw = main_window(event_callback = e, gamestate = g)
+mw = main_window(event_callback = e, gamestate = g, interval = 20)
 mw.show()
-mw.board.update_gamestate (g)
+e(events.tick)
 sys.exit(app.exec_())
 """

@@ -10,6 +10,7 @@ from .data import events as events
 import yaml
 import math
 import random
+import copy
 
 class game:
 	def __init__(self, event):
@@ -111,7 +112,7 @@ class game:
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
-		return self
+		return copy.deepcopy(self)
 		
 	def loose_life(self, amount):
 		self.life -= amount
