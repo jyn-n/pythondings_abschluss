@@ -1,2 +1,2 @@
-!!python/object:core.data.tower.tower {attack_range: 2, damage: 2, fire_rate: 2, money: 2,
-  name: Small Tower}
+!!python/object:core.data.tower_type.tower_type {attack_range: 2, attack_time: 2,
+  damage: 2, money: 2, name: Small Tower}
