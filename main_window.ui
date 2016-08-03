@@ -47,10 +47,10 @@
    <widget class="QListWidget" name="list_towers">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>70</y>
-      <width>441</width>
-      <height>192</height>
+      <x>20</x>
+      <y>60</y>
+      <width>171</width>
+      <height>281</height>
      </rect>
     </property>
    </widget>
@@ -93,6 +93,22 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QTableWidget" name="waves">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>60</y>
+      <width>301</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+   </widget>
    <widget class="DebugConsole" name="console" native="true">
     <property name="enabled">
      <bool>true</bool>
@@ -101,16 +117,16 @@
      <rect>
       <x>10</x>
       <y>580</y>
-      <width>471</width>
+      <width>501</width>
       <height>341</height>
      </rect>
     </property>
     <widget class="ConsoleEdit" name="input">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>300</y>
-       <width>441</width>
+       <width>481</width>
        <height>31</height>
       </rect>
      </property>
@@ -118,9 +134,9 @@
     <widget class="ConsoleView" name="output">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>10</y>
-       <width>441</width>
+       <width>481</width>
        <height>261</height>
       </rect>
      </property>
@@ -129,13 +145,13 @@
     <zorder>output</zorder>
     <zorder>info</zorder>
    </widget>
-   <widget class="QTableWidget" name="waves">
+   <widget class="Infowidget" name="info">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>290</y>
-      <width>441</width>
-      <height>281</height>
+      <x>20</x>
+      <y>350</y>
+      <width>481</width>
+      <height>211</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderVisible">
@@ -182,6 +198,11 @@
     <slot>submit(QString)</slot>
    </slots>
   </customwidget>
+  <customwidget>
+   <class>Infowidget</class>
+   <extends>QTableWidget</extends>
+   <header>infowidget.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
@@ -208,8 +229,8 @@
    <slot>submit_console(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>906</x>
-     <y>615</y>
+     <x>876</x>
+     <y>905</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -224,12 +245,12 @@
    <slot>submit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>830</x>
-     <y>611</y>
+     <x>800</x>
+     <y>901</y>
     </hint>
     <hint type="destinationlabel">
-     <x>823</x>
-     <y>570</y>
+     <x>793</x>
+     <y>860</y>
     </hint>
    </hints>
   </connection>
@@ -249,11 +270,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>list_towers</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>Form</receiver>
+   <slot>show_tower(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>763</x>
+     <y>190</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>683</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_attacker_type(int)</slot>
   <slot>game_board_clicked(QPoint)</slot>
   <slot>submit_console(QString)</slot>
   <slot>toggle_pause()</slot>
+  <slot>show_tower(QListWidgetItem*)</slot>
  </slots>
 </ui>

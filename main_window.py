@@ -24,10 +24,12 @@ class main_window ( window_base_class, ui_main_window ):
 		if gamestate != None:
 			self.init_gamestate(gamestate)
 
+		self.console.setVisible(False)
+
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
 		self._timer.setInterval(interval)
-		#self._timer.start(interval)
+		self._timer.start()
 
 	def toggle_pause (self):
 		if self._timer.isActive():
@@ -52,18 +54,18 @@ class main_window ( window_base_class, ui_main_window ):
 			self.waves.setItem ( i, 0, QtGui.QTableWidgetItem ( str(wave) ) )
 			self.waves.setItem ( i, 1, QtGui.QTableWidgetItem ( str(gamestate.waves[wave].spawn_point) ) )
 			for attacker in gamestate.waves[wave].attacker:
-				print (i, attacker)
 				self.waves.setItem ( i, 2, QtGui.QTableWidgetItem ( attacker ) )
 				self.waves.setItem ( i, 3, QtGui.QTableWidgetItem ( str ( gamestate.waves[wave].attacker [attacker] ) ) )
 				i += 1
 
-		self.draw_gamestate ( gamestate )
+		self.update_gamestate ( gamestate )
 
 	def draw_gamestate ( self , gamestate ):
 		self.money.setText ( str (gamestate.money) )
 		self.life.setText ( str (gamestate.life) )
 
 	def update_gamestate (self, gamestate):
+		self._gamestate = gamestate
 		self.draw_gamestate ( gamestate )
 		self.board.update_gamestate(gamestate)
 		self.repaint()
@@ -97,10 +99,13 @@ class main_window ( window_base_class, ui_main_window ):
 		self.event_answer.emit ( str ( self._event ( event_name, *self.parse_args(*args) ) ) )
 
 	def keyPressEvent ( self, event ):
-		#print (event.key())
-		if event.key() == Qt.Key_Backtab:
-			self.console.setVisible ( not self.console.visible() ) #TODO
+		if event.key() == Qt.Key_QuoteLeft:
+			self.console.setVisible ( not self.console.isVisible() ) #TODO
 			event.accept()
 			return
 
 		super().keyPressEvent (event)
+
+	def show_tower ( self, tower ):
+		self.info.show_tower ( self._gamestate.towers[tower.text()] )
+
