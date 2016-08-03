@@ -7,11 +7,12 @@ Created on Sun Jul 24 15:21:45 2016
 
 
 class tile:
-	def __init__(self):
+	def __init__(self, pos):
 		self._accessible = True
 		self._buildable = True
 		self._tower = None
 		self.next_tile = (1,0)
+		self.position = pos
 		
 	def add_tower(self, tower):
 		if self._tower == None:
@@ -50,7 +51,7 @@ class tile:
 class field:
 	def __init__(self, n, m, spawn_points, targets):
 		self._size = (n,m)
-		self._tiles = { (i,j) : tile() for i in range(n) for j in range(m) }
+		self._tiles = { (i,j) : tile((i,j)) for i in range(n) for j in range(m) }
 		self.spawn_points = spawn_points #dict of spawn ponits (id: position)
 		self.targets = targets #list of positions
 
