@@ -2402,6 +2402,6 @@ _tiles:
     _tower: null
     next_tile: *id001
 spawn_points:
-  0: !!python/tuple [12, 12]
+  0: !!python/tuple [0, 0]
 targets:
-- !!python/tuple [0, 0]
+- !!python/tuple [19, 19]

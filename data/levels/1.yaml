@@ -1,6 +1,7 @@
 !!python/object:core.data.level.level
 field: data/fields/field1.yaml
 life: 1
+staring_money: 1000
 towers: [data/towers/laser_tower.yaml]
 waves:
   1: !!python/object:core.data.wave.wave
