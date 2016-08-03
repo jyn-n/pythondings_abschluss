@@ -106,6 +106,6 @@ class main_window ( window_base_class, ui_main_window ):
 
 		super().keyPressEvent (event)
 
-	def show_tower ( self, tower ):
-		self.info.show_tower ( self._gamestate.towers[tower.text()] )
+	def show_tower_type ( self, tower_item ):
+		self.info.show_tower_type ( self._gamestate.towers_types[tower_item.text()] )
 
