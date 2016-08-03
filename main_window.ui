@@ -274,15 +274,15 @@
    <sender>list_towers</sender>
    <signal>itemActivated(QListWidgetItem*)</signal>
    <receiver>Form</receiver>
-   <slot>show_tower(QListWidgetItem*)</slot>
+   <slot>show_tower_type(QListWidgetItem*)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>190</y>
+     <x>772</x>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
-     <x>683</x>
-     <y>176</y>
+     <x>693</x>
+     <y>190</y>
     </hint>
    </hints>
   </connection>
@@ -292,6 +292,6 @@
   <slot>game_board_clicked(QPoint)</slot>
   <slot>submit_console(QString)</slot>
   <slot>toggle_pause()</slot>
-  <slot>show_tower(QListWidgetItem*)</slot>
+  <slot>show_tower_type(QListWidgetItem*)</slot>
  </slots>
 </ui>

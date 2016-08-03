@@ -43,7 +43,7 @@ class main_window ( window_base_class, ui_main_window ):
 	def init_gamestate (self, gamestate):
 		self.board.update_gamestate(gamestate)
 
-		for tower in gamestate.towers:
+		for tower in gamestate.tower_type:
 			self.list_towers.addItem (tower)
 
 		self.waves.setColumnCount (4)
