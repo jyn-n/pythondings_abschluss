@@ -3,13 +3,20 @@ import functools
 
 import core.data.events as events
 
+import shlex
+
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
 
 class main_window ( window_base_class, ui_main_window ):
+
+	event_answer = QtCore.pyqtSignal(str)
+
 	def __init__ (self, parent = None, event_callback = None, gamestate = None, interval = 20):
 		window_base_class.__init__(self, parent)
 		ui_main_window.__init__(self)
 		self.setupUi(self)
+
+		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
 
 		self.set_event_callback (event_callback)
 		if gamestate != None:
@@ -34,3 +41,9 @@ class main_window ( window_base_class, ui_main_window ):
 
 	def game_board_clicked (self, position):
 		self._event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , (position.x(), position.y()) ) 
+
+	def submit_console (self, text):
+		self.submit_console_split ( *shlex.split(text) )
+
+	def submit_console_split (self, *args):
+		self.event_answer.emit ( str ( self._event ( *args ) ) )

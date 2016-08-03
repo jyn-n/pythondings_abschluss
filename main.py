@@ -11,7 +11,8 @@ import sys
 
 #init objects
 
-l = logger(log.error, log.warning, log.event)
+#l = logger ( log.error, log.warning )
+l = logger ( log.error, log.warning , log.event )
 e = event_manager(l)
 g = game(e)
 
@@ -34,9 +35,9 @@ r ( events.take_damage, g.take_damage )
 r ( events.fire_tower, g.fire_tower )
 r ( events.fire_all, g.fire_all )
 r ( events.tick, tick)
-r ( events.loose, lambda: None)
-r ( events.win, lambda: None)
-r (events.loose_life, g.loose_life)
+r ( events.loose, lambda: None )
+r ( events.win, lambda: None )
+r ( events.loose_life, g.loose_life )
 
 del r
 
