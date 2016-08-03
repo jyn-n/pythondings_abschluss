@@ -12,6 +12,7 @@ import yaml
 import math
 import random
 import copy
+from pathlib import Path
 
 class game:
 	def __init__(self, event):
@@ -27,14 +28,17 @@ class game:
 			self.towers[twr.name] = twr
 		self.waves = lvl.waves
 		
-		
-		#TODO: load all attackers types (dict name:object)
-		self.attacker_type = {"Goblin":yaml.load(open("data/attacker/goblin.yaml", "r"))}
+		self.attacker_type = {}
+		att = Path("data/attacker").glob("*.yaml")
+		for x in att:
+			att2 = yaml.load(x.open())
+			self.attacker_type[att2.name] = att2
+			
 		self.attacker = {}
 		self.current_attacker_id = 0
 		self.time = 0
 		self.life = lvl.life
-		
+				
 	def place_tower(self, tower, pos):
 		atpl = True
 		for x in self.attacker:
@@ -66,6 +70,7 @@ class game:
 		self.attacker[i].progress = self.attacker[i].progress % constants.distance
 		for x in self.field.targets:
 			if self.attacker[i].position == x:
+				print("uaghb")
 				self.event(events.die, i)
 				self.event(events.loose_life, 1)
 				
@@ -113,7 +118,6 @@ class game:
 				self.event(events.fire_tower, x)
 				
 	def tick(self):
-		#self.update_paths()
 		self.event(events.move_all)
 		if self.time in self.waves:
 			self.event(events.spawn_wave, self.waves[self.time])
@@ -135,12 +139,21 @@ class game:
 		
 	def update_paths(self):
 		temp = {}
-		i = 1
+		i = 0
+		temp[0] = []
 		for x in self.field.targets:
-			temp[0] = x
-		while False:
-			pass
-			
-			
+			temp[0].append(x)
+		field_added = True
+		while field_added:
+			field_added = False
+			temp[i+1] = []
+			for x in temp[i]:
+				for dz in [(-1, 0), (1,0), (0,-1), (0,1)]:
+					new_tile = (x[0] + dz[0], x[1] + dz[1])
+					if (new_tile in self.field) and not any(new_tile in l for l in temp.values()):
+						self.field[new_tile[0], new_tile[1]].next_tile = x
+						temp[i+1].append(new_tile)
+						field_added = True
+			i += 1
 		
 
