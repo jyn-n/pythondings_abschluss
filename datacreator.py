@@ -10,6 +10,7 @@ import yaml
 
 
 x = field(20,20, {0:(0,0)}, [(19,19)])
+x[0,1].make_unaccessible()
 x[2,2].make_unaccessible()
 yaml.dump(x, open("data/fields/field1.yaml", "w"))
 

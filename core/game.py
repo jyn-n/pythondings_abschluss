@@ -47,6 +47,7 @@ class game:
 				atpl = False
 		if self.field[pos[0], pos[1]].is_buildable() and atpl:
 			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
+		self.update_paths()
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -66,13 +67,15 @@ class game:
 	
 	def move(self, i):
 		self.attacker[i].progress += self.attacker[i].attacker_type.speed
-		pos = self.exact_position(i)
-		self.attacker[i].position = (pos[0] // constants.distance, pos[1] // constants.distance)
-		self.attacker[i].progress = self.attacker[i].progress % constants.distance
-		for x in self.field.targets:
-			if self.attacker[i].position == x:
-				self.event(events.die, i)
-				self.event(events.loose_life, 1)
+		while i in self.attacker and self.attacker[i].progress >= constants.distance:
+			self.attacker[i].progress -= constants.distance
+			pos = self.attacker[i].position
+			dz = self.field[pos[0], pos[1]].next_tile
+			self.attacker[i].position = (pos[0] + dz[0], pos[1] + dz[1])
+			for x in self.field.targets:
+				if self.attacker[i].position == x:
+					self.event(events.die, i)
+					self.event(events.loose_life, 1)
 				
 	def move_all(self):
 		all_att = self.attacker.copy()
@@ -139,6 +142,7 @@ class game:
 		return x
 		
 	def update_paths(self):
+		old = copy.deepcopy(self.field)		
 		temp = {}
 		i = 0
 		temp[0] = []
@@ -151,10 +155,18 @@ class game:
 			for x in temp[i]:
 				for dz in [(-1, 0), (1,0), (0,-1), (0,1)]:
 					new_tile = (x[0] + dz[0], x[1] + dz[1])
-					if (new_tile in self.field) and not any(new_tile in l for l in temp.values()):
+					if (new_tile in self.field) and self.field[new_tile[0], new_tile[1]].is_accessible() and not any(new_tile in l for l in temp.values()):
 						self.field[new_tile[0], new_tile[1]].next_tile = (-dz[0], -dz[1])
 						temp[i+1].append(new_tile)
 						field_added = True
 			i += 1
+		for x in self.field:
+			if not any(x in l for l in temp.values()):
+				self.field[x[0], x[1]].next_tile = (0,0)
+				
+				
+			
+	def valid_paths(self):
+		pass
 		
 
