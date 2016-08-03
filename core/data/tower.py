@@ -15,7 +15,7 @@ class tower:
 			self._cooldown -= 1
 			
 	def fire(self):
-		self._cooldown = tower_type.attack_time
+		self._cooldown = self.tower_type.attack_time
 		
 	def can_fire(self):
 		return self._cooldown == 0
