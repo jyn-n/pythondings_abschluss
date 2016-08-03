@@ -12,7 +12,7 @@ class event_manager:
 		self._events[name] += (callback,)
 
 	def __call__ (self, name, *params):
-		self._logger(event)("calling <<", name, ">> with:", *map (str, params))
+		self._logger(event)("calling <<", name, ">> with:", " , ".join(map (lambda x: type(x).__name__ + ':' + str(x) , params)))
 		if name not in self._events: return None
 		for f in self._events [name]:
 			a = f(*params)

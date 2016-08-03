@@ -44,8 +44,11 @@ class GameBoardWidget (QtGui.QFrame):
 	def paint_tile ( self, painter, tile, position):
 		painter.fillRect ( * ( tuple(self.tile_position_pixels ( position )) + tuple(self.tile_size_pixels()) + (self.tile_brush ( tile ),) ) ) #this tuple + stuff is unnessecary as of python 3.5.2 (or maybe earlier), just use * instead
  
-	@staticmethod
-	def tile_brush ( tile ):
+	def tile_brush ( self, tile ):
+		if ( tile in self._gamestate.field.targets ):
+			return Qt.white
+		if ( tile in self._gamestate.field.spawn_points.values() ):
+			return Qt.lilac
 		if ( tile.has_tower() ): return Qt.black
 		return { (True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
 

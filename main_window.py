@@ -4,6 +4,7 @@ import functools
 import core.data.events as events
 
 import shlex
+import re
 
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
 
@@ -24,7 +25,7 @@ class main_window ( window_base_class, ui_main_window ):
 
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
-		self._timer.start(interval)
+		#self._timer.start(interval)
 
 	def set_event_callback (self, callback):
 		self._event = callback
@@ -45,5 +46,24 @@ class main_window ( window_base_class, ui_main_window ):
 	def submit_console (self, text):
 		self.submit_console_split ( *shlex.split(text) )
 
-	def submit_console_split (self, *args):
-		self.event_answer.emit ( str ( self._event ( *args ) ) )
+	@staticmethod
+	def parse_arg ( arg ):
+		try:
+			i = int(arg)
+			return i
+		except ValueError:
+			pass
+		except TypeError:
+			pass
+
+		if arg[0] == '(' and arg[-1] == ')':
+			return tuple(main_window.parse_args ( *arg[1:len(arg)-1].split(',')  ))
+
+		return arg
+
+	@staticmethod
+	def parse_args ( *args ):
+		return map (main_window.parse_arg, args)
+
+	def submit_console_split (self, event_name, *args):
+		self.event_answer.emit ( str ( self._event ( event_name, *self.parse_args(*args) ) ) )
