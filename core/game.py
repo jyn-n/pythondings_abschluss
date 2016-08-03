@@ -39,8 +39,6 @@ class game:
 		self.time = 0
 		self.life = lvl.life
 		self.update_paths()
-		for x in self.field:
-			print(x, self.field[x[0],x[1]].next_tile)
 				
 	def place_tower(self, tower, pos):
 		atpl = True
@@ -73,7 +71,6 @@ class game:
 		self.attacker[i].progress = self.attacker[i].progress % constants.distance
 		for x in self.field.targets:
 			if self.attacker[i].position == x:
-				print("uaghb")
 				self.event(events.die, i)
 				self.event(events.loose_life, 1)
 				
@@ -103,7 +100,6 @@ class game:
 		del self.attacker[i]
 		
 	def take_damage(self, i, amount):
-		print(self.attacker[i].get_hp(), self.exact_position(i))
 		if self.attacker[i].take_damage(amount):
 			self.event(events.die, i)
 			
@@ -125,6 +121,7 @@ class game:
 		self.event(events.move_all)
 		if self.time in self.waves:
 			self.event(events.spawn_wave, self.waves[self.time])
+		self.event(events.fire_all)
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)

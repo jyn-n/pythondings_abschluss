@@ -19,7 +19,7 @@ yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
 z = tower("Small Tower", 2, 2, 2, 2)
 yaml.dump(z, open("data/towers/small_tower.yaml", "w"))
 
-a = attacker_type("Goblin", 1000, 100, 100)
+a = attacker_type("Goblin", 10, 100, 100)
 yaml.dump(a, open("data/attacker/goblin.yaml", "w"))
 b = attacker_type("Orc", 2, 5, 5)
 yaml.dump(b, open("data/attacker/orc.yaml", "w"))
