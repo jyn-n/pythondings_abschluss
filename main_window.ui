@@ -21,8 +21,8 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>1273</width>
-     <height>467</height>
+     <width>661</width>
+     <height>941</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -35,10 +35,10 @@
   <widget class="QGroupBox" name="panel">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>480</y>
-     <width>1273</width>
-     <height>466</height>
+     <x>710</x>
+     <y>10</y>
+     <width>531</width>
+     <height>941</height>
     </rect>
    </property>
    <property name="title">
@@ -48,10 +48,49 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>30</y>
-      <width>256</width>
+      <y>70</y>
+      <width>441</width>
       <height>192</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pause_button">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>79</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pause</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="life">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>20</y>
+      <width>57</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="money">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>40</y>
+      <width>57</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
    <widget class="DebugConsole" name="console" native="true">
@@ -60,19 +99,19 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>30</y>
-      <width>511</width>
-      <height>351</height>
+      <x>10</x>
+      <y>580</y>
+      <width>471</width>
+      <height>341</height>
      </rect>
     </property>
     <widget class="ConsoleEdit" name="input">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>320</y>
-       <width>461</width>
-       <height>20</height>
+       <y>300</y>
+       <width>441</width>
+       <height>31</height>
       </rect>
      </property>
     </widget>
@@ -81,11 +120,30 @@
       <rect>
        <x>20</x>
        <y>10</y>
-       <width>461</width>
-       <height>291</height>
+       <width>441</width>
+       <height>261</height>
       </rect>
      </property>
     </widget>
+    <zorder>input</zorder>
+    <zorder>output</zorder>
+    <zorder>info</zorder>
+   </widget>
+   <widget class="QTableWidget" name="waves">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>290</y>
+      <width>441</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
    </widget>
   </widget>
  </widget>
@@ -150,8 +208,8 @@
    <slot>submit_console(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>756</x>
-     <y>845</y>
+     <x>906</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -166,12 +224,28 @@
    <slot>submit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>680</x>
-     <y>841</y>
+     <x>830</x>
+     <y>611</y>
     </hint>
     <hint type="destinationlabel">
-     <x>673</x>
-     <y>795</y>
+     <x>823</x>
+     <y>570</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pause_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>toggle_pause()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>766</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>695</x>
+     <y>39</y>
     </hint>
    </hints>
   </connection>
@@ -180,5 +254,6 @@
   <slot>select_attacker_type(int)</slot>
   <slot>game_board_clicked(QPoint)</slot>
   <slot>submit_console(QString)</slot>
+  <slot>toggle_pause()</slot>
  </slots>
 </ui>

@@ -1,4 +1,5 @@
 from PyQt4 import QtCore, QtGui, uic
+Qt = QtCore.Qt
 import functools
 
 import core.data.events as events
@@ -25,7 +26,14 @@ class main_window ( window_base_class, ui_main_window ):
 
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
+		self._timer.setInterval(interval)
 		#self._timer.start(interval)
+
+	def toggle_pause (self):
+		if self._timer.isActive():
+			self._timer.stop()
+		else:
+			self._timer.start()
 
 	def set_event_callback (self, callback):
 		self._event = callback
@@ -36,7 +44,27 @@ class main_window ( window_base_class, ui_main_window ):
 		for tower in gamestate.towers:
 			self.list_towers.addItem (tower)
 
+		self.waves.setColumnCount (4)
+		self.waves.setRowCount (functools.reduce ( (lambda x,y: len(gamestate.waves[x].attacker) + len(gamestate.waves[y].attacker)), gamestate.waves ) )
+
+		i = 0
+		for wave in gamestate.waves:
+			self.waves.setItem ( i, 0, QtGui.QTableWidgetItem ( str(wave) ) )
+			self.waves.setItem ( i, 1, QtGui.QTableWidgetItem ( str(gamestate.waves[wave].spawn_point) ) )
+			for attacker in gamestate.waves[wave].attacker:
+				print (i, attacker)
+				self.waves.setItem ( i, 2, QtGui.QTableWidgetItem ( attacker ) )
+				self.waves.setItem ( i, 3, QtGui.QTableWidgetItem ( str ( gamestate.waves[wave].attacker [attacker] ) ) )
+				i += 1
+
+		self.draw_gamestate ( gamestate )
+
+	def draw_gamestate ( self , gamestate ):
+		self.money.setText ( str (gamestate.money) )
+		self.life.setText ( str (gamestate.life) )
+
 	def update_gamestate (self, gamestate):
+		self.draw_gamestate ( gamestate )
 		self.board.update_gamestate(gamestate)
 		self.repaint()
 
@@ -67,3 +95,12 @@ class main_window ( window_base_class, ui_main_window ):
 
 	def submit_console_split (self, event_name, *args):
 		self.event_answer.emit ( str ( self._event ( event_name, *self.parse_args(*args) ) ) )
+
+	def keyPressEvent ( self, event ):
+		#print (event.key())
+		if event.key() == Qt.Key_Backtab:
+			self.console.setVisible ( not self.console.visible() ) #TODO
+			event.accept()
+			return
+
+		super().keyPressEvent (event)

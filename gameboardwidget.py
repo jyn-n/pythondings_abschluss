@@ -35,7 +35,8 @@ class GameBoardWidget (QtGui.QFrame):
 		return r
 
 	def board_dimension ( self ):
-		return ( math.floor(self.width() / 30), math.floor(self.height() / 30) ) #TODO
+		return ( self._gamestate.field.size() )
+		#return ( math.floor(self.width() / 30), math.floor(self.height() / 30) ) #TODO
 
 	def paint_board ( self, painter ):
 		for p in itertools.product ( *( range(min(x,z), min(x+y, z)) for (x,y,z) in zip (self._position, self.board_dimension(), self._gamestate.field.size()) ) ):
@@ -45,10 +46,10 @@ class GameBoardWidget (QtGui.QFrame):
 		painter.fillRect ( * ( tuple(self.tile_position_pixels ( position )) + tuple(self.tile_size_pixels()) + (self.tile_brush ( tile ),) ) ) #this tuple + stuff is unnessecary as of python 3.5.2 (or maybe earlier), just use * instead
  
 	def tile_brush ( self, tile ):
-		if ( tile in self._gamestate.field.targets ):
-			return Qt.white
-		if ( tile in self._gamestate.field.spawn_points.values() ):
-			return Qt.lilac
+		if ( tile.position in self._gamestate.field.targets ):
+			return Qt.darkRed
+		if ( tile.position in self._gamestate.field.spawn_points.values() ):
+			return Qt.magenta
 		if ( tile.has_tower() ): return Qt.black
 		return { (True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
 
