@@ -8,5 +8,5 @@ waves:
     attacker: {Goblin: 5}
     spawn_point: 0
   2: !!python/object:core.data.wave.wave
-    attacker: {Goblin: 3}
+    attacker: {Goblin: 3, Orc: 5}
     spawn_point: 0
