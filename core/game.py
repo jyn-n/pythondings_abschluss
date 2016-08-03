@@ -17,15 +17,14 @@ from pathlib import Path
 class game:
 	def __init__(self, event):
 		self.event = event
-		pass
 	
 	def load_level(self, level): #level is the path of the level file
 		lvl = yaml.load(open(level, "r"))
 		self.field = yaml.load(open(lvl.field, "r"))
-		self.towers = {}
-		for x in lvl.towers:
+		self.tower_type = {}
+		for x in lvl.tower_type:
 			twr = yaml.load(open(x, "r"))
-			self.towers[twr.name] = twr
+			self.towers_type[twr.name] = twr
 		self.waves = lvl.waves
 		
 		self.attacker_type = {}
@@ -46,12 +45,12 @@ class game:
 		for x in self.attacker:
 			if self.attacker[x].position == pos:
 				atpl = False
-		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= self.towers[tower].money and not pos in self.field.targets:
-			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
+		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= self.tower_type[tower].money and not pos in self.field.targets:
+			self.field[pos[0], pos[1]].add_tower(self.tower_type[tower])
 			if not self.update_paths():
 				self.field[pos[0], pos[1]].delete_tower()
 			else:
-				self.event(events.loose_money, self.towers[tower].money)
+				self.event(events.loose_money, self.tower_type[tower].money)
 
 		
 	def spawn_wave(self, wave):
@@ -99,7 +98,7 @@ class game:
 		for att in self.attacker:
 			pos2 = self.exact_position(att)
 			x = math.sqrt((pos1[0] * constants.distance - pos2[0])**2 + (pos1[1] * constants.distance - pos2[1])**2)
-			if x < self.field[pos1[0], pos1[1]].get_tower().attack_range:
+			if x < self.field[pos1[0], pos1[1]].get_tower_type().attack_range:
 				attir.append(att)
 		return attir
 
@@ -116,11 +115,11 @@ class game:
 	def fire_tower(self, pos):
 		if self.field[pos[0], pos[1]].has_tower():
 			twr = self.field[pos[0], pos[1]].get_tower()
-			for i in range(twr.fire_rate):
-				attir = self.attackers_in_range(pos)
-				if len(attir) > 0:
-					rand = random.choice(attir)
-					self.event(events.take_damage, rand, twr.damage)
+			attir = self.attackers_in_range(pos)
+			if len(attir) > 0 and twr.can_fire():
+				rand = random.choice(attir)
+				self.event(events.take_damage, rand, twr.tower_type.damage)
+				twr.fire()
 				
 	def fire_all(self):
 		for x in self.field:
@@ -135,6 +134,8 @@ class game:
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
+		for x in self.field:
+			self.field[x[0],x[1]].get_tower().cooldown()
 		return copy.deepcopy(self)
 		
 	def loose_life(self, amount):

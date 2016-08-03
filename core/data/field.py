@@ -5,7 +5,6 @@ Created on Sun Jul 24 15:21:45 2016
 @author: Jan
 """
 
-
 class tile:
 	def __init__(self, pos):
 		self._accessible = True
@@ -14,9 +13,9 @@ class tile:
 		self.next_tile = (1,0)
 		self.position = pos
 		
-	def add_tower(self, tower):
+	def add_tower(self, twr):
 		if self._tower == None:
-			self._tower = tower
+			self._tower = tower(twr)
 		else:
 			raise Exception("tower already present") 
 
@@ -28,6 +27,9 @@ class tile:
 		
 	def get_tower(self):
 		return self._tower
+		
+	def get_tower_type(self):
+		return self._tower.tower_type
 		
 	def is_accessible(self):
 		return self._accessible and not self.has_tower()

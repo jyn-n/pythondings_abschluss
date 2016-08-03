@@ -11,3 +11,4 @@ from .attacker import attacker
 from .level import level
 from .wave import wave
 from .attacker_type import attacker_type
+from .tower_type import tower_type

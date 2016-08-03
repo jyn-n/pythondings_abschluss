@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jul 24 15:18:17 2016
+Created on Wed Aug  3 18:05:55 2016
 
 @author: Jan
 """
 
 class tower:
-	def __init__(self, name, attack_range, fire_rate, money, damage):
-		self.name = name
-		self.attack_range = attack_range
-		self.fire_rate = fire_rate
-		self.money = money
-		self.damage = damage
-        
+	def __init__(self, tower_type):
+		self.tower_type = tower_type
+		self._cooldown = 0
+		
+	def tick(self):
+		if self._cooldown > 0:
+			self._cooldown -= 1
+			
+	def fire(self):
+		self._cooldown = tower_type.attack_time
+		
+	def can_fire(self):
+		return self._cooldown == 0
