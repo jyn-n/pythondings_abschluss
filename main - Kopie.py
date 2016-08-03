@@ -35,7 +35,9 @@ r ( events.fire_all, g.fire_all )
 r ( events.tick, tick)
 r ( events.loose, lambda: None)
 r ( events.win, lambda: None)
-r (events.loose_life, g.loose_life)
+r ( events.loose_life, g.loose_life)
+r ( events.get_money, g.get_money)
+r ( events.loose_money, g.loose_money)
 
 del r
 

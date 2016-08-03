@@ -188,6 +188,12 @@ class game:
 			if self.field[x[0], x[1]].next_tile == (0,0):
 				return False
 		return True
+		
+	def get_money(self, x):
+		self.money += x
+		
+	def loose_money(self, x):
+		self.money -= x
 			
 		
 
