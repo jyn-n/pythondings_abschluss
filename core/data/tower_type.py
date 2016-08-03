@@ -5,7 +5,7 @@ Created on Sun Jul 24 15:18:17 2016
 @author: Jan
 """
 
-class tower:
+class tower_type:
 	def __init__(self, name, attack_range, attack_time, money, damage):
 		self.name = name
 		self.attack_range = attack_range
