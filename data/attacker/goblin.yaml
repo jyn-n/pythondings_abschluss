@@ -1,2 +1,2 @@
 !!python/object:core.data.attacker_type.attacker_type {hp: 100, money: 100, name: Goblin,
-  speed: 3200}
+  speed: 5}

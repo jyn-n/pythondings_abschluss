@@ -13,6 +13,7 @@ class event_manager:
 
 	def __call__ (self, name, *params):
 		self._logger(event)("calling <<", name, ">> with:", *map (str, params))
+		if name not in self._events: return None
 		for f in self._events [name]:
 			a = f(*params)
 		return a

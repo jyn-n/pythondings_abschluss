@@ -48,6 +48,5 @@ e ( events.load_level, "data/levels/1.yaml" )
 app = QtGui.QApplication(sys.argv)
 mw = main_window(event_callback = e, gamestate = g, interval = 20)
 mw.show()
-e(events.tick)
 sys.exit(app.exec_())
 

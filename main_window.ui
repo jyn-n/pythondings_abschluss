@@ -55,6 +55,39 @@
      </rect>
     </property>
    </widget>
+   <widget class="DebugConsole" name="console" native="true">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>90</y>
+      <width>511</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <widget class="ConsoleEdit" name="input">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>320</y>
+       <width>461</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="ConsoleView" name="output">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>461</width>
+       <height>281</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
@@ -65,6 +98,31 @@
    <container>1</container>
    <slots>
     <signal>click(QPoint)</signal>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>ConsoleEdit</class>
+   <extends>QLineEdit</extends>
+   <header>consoleedit.h</header>
+   <slots>
+    <signal>submit(QString)</signal>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>DebugConsole</class>
+   <extends>QWidget</extends>
+   <header>debugconsole.h</header>
+   <container>1</container>
+   <slots>
+    <slot>submit(QString)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>ConsoleView</class>
+   <extends>QListWidget</extends>
+   <header>consoleview.h</header>
+   <slots>
+    <slot>submit(QString)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -83,6 +141,22 @@
     <hint type="destinationlabel">
      <x>1</x>
      <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>input</sender>
+   <signal>submit(QString)</signal>
+   <receiver>output</receiver>
+   <slot>submit(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>793</x>
+     <y>904</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>787</x>
+     <y>859</y>
     </hint>
    </hints>
   </connection>

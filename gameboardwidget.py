@@ -50,12 +50,12 @@ class GameBoardWidget (QtGui.QFrame):
 		return { (True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
 
 	def attacker_position ( self, exact_position ):
-		return map ( lambda x,sx: x * sx / constants.distance for (x,sx) in zip ( exact_position, self.tile_size() ) )
+		return tuple(x * sx / constants.distance + sx / 2 for (x,sx) in zip ( exact_position, self.tile_size() ) )
 
 	def paint_attacker ( self, painter, attacker ):
-		position = attacker_position ( self._gamestate.exact_position ( attacker ) )
-		painter.setColor (QtCore.Qt.pink)
-		painter.drawEllipse(QtCore.QPointF ( position[0], position[1] , 5, 5 ) ) #TODO
+		position = self.attacker_position ( self._gamestate.exact_position ( attacker ) )
+		painter.setBrush (QtCore.Qt.white)
+		painter.drawEllipse(QtCore.QPointF ( *position ) , 5, 5 )  #TODO
 
 	def paint_attackers ( self, painter ):
 		for attacker in self._gamestate.attacker:
