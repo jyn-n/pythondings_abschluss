@@ -7,7 +7,7 @@ Created on Sun Jul 24 18:06:22 2016
 
 class level:
 	def __init__(self, tower_type, field, waves, life, money):
-		self.tower_types = tower_type #list of towers filenames
+		self.tower_type = tower_type #list of towers filenames
 		self.field = field
 		self.waves = waves #dict of waves (time:wave)
 		self.life = life
