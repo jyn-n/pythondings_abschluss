@@ -135,7 +135,7 @@ class game:
 		if self.has_won():
 			self.event(events.win)
 		for x in self.field:
-			self.field[x[0],x[1]].get_tower().cooldown()
+			self.field[x[0],x[1]].get_tower().tick()
 		return copy.deepcopy(self)
 		
 	def loose_life(self, amount):
