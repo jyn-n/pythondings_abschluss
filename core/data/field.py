@@ -4,7 +4,7 @@ Created on Sun Jul 24 15:21:45 2016
 
 @author: Jan
 """
-
+from .tower import tower
 class tile:
 	def __init__(self, pos):
 		self._accessible = True
