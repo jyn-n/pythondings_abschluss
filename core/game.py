@@ -39,16 +39,19 @@ class game:
 		self.time = 0
 		self.life = lvl.life
 		self.update_paths()
+		self.money = lvl.starting_money
 				
 	def place_tower(self, tower, pos):
 		atpl = True
 		for x in self.attacker:
 			if self.attacker[x].position == pos:
 				atpl = False
-		if self.field[pos[0], pos[1]].is_buildable() and atpl:
+		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= tower.money:
 			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
 			if not self.update_paths():
 				self.field[pos[0], pos[1]].delete_tower()
+			else:
+				self.event(events.loose_money, tower.money)
 
 		
 	def spawn_wave(self, wave):
@@ -106,7 +109,9 @@ class game:
 		
 	def take_damage(self, i, amount):
 		if self.attacker[i].take_damage(amount):
+			self.event(event.get_money, self.attacker[i].money)
 			self.event(events.die, i)
+			
 			
 	def fire_tower(self, pos):
 		if self.field[pos[0], pos[1]].has_tower():
