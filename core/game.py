@@ -38,6 +38,9 @@ class game:
 		self.current_attacker_id = 0
 		self.time = 0
 		self.life = lvl.life
+		self.update_paths()
+		for x in self.field:
+			print(x, self.field[x[0],x[1]].next_tile)
 				
 	def place_tower(self, tower, pos):
 		atpl = True
@@ -75,7 +78,8 @@ class game:
 				self.event(events.loose_life, 1)
 				
 	def move_all(self):
-		for i in self.attacker:
+		all_att = self.attacker.copy()
+		for i in all_att:
 			self.event(events.move, i)
 			
 	def exact_position(self, i):
@@ -129,7 +133,7 @@ class game:
 	def loose_life(self, amount):
 		self.life -= amount
 		if self.life <= 0:
-			self.event(event.loose)
+			self.event(events.loose)
 			
 	def has_won(self):
 		x = (len(self.attacker) == 0)
@@ -151,7 +155,7 @@ class game:
 				for dz in [(-1, 0), (1,0), (0,-1), (0,1)]:
 					new_tile = (x[0] + dz[0], x[1] + dz[1])
 					if (new_tile in self.field) and not any(new_tile in l for l in temp.values()):
-						self.field[new_tile[0], new_tile[1]].next_tile = x
+						self.field[new_tile[0], new_tile[1]].next_tile = (-dz[0], -dz[1])
 						temp[i+1].append(new_tile)
 						field_added = True
 			i += 1
