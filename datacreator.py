@@ -15,7 +15,7 @@ x[2,2].make_unaccessible()
 yaml.dump(x, open("data/fields/field1.yaml", "w"))
 
 
-y = tower("Laser Tower", 5000, 1, 6, 7)
+y = tower("Laser Tower", 5000, 1, 2, 7)
 yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
 z = tower("Small Tower", 2, 2, 2, 2)
 yaml.dump(z, open("data/towers/small_tower.yaml", "w"))
@@ -26,5 +26,5 @@ b = attacker_type("Orc", 2, 5, 5)
 yaml.dump(b, open("data/attacker/orc.yaml", "w"))
 
 c = level(["data/towers/laser_tower.yaml"], "data/fields/field1.yaml",
-	{1 : wave({"Goblin":5}, 0), 2 : wave({"Goblin":3}, 0)}, 1, 1000)
+	{1 : wave({"Goblin":5}, 0), 2 : wave({"Goblin":3}, 0)}, 1, 10)
 yaml.dump(c, open("data/levels/1.yaml", "w"))

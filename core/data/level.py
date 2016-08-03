@@ -11,7 +11,7 @@ class level:
 		self.field = field
 		self.waves = waves #dict of waves (time:wave)
 		self.life = life
-		self.staring_money = money
+		self.starting_money = money
 		
 		
 	
