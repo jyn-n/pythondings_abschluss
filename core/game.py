@@ -46,7 +46,7 @@ class game:
 		for x in self.attacker:
 			if self.attacker[x].position == pos:
 				atpl = False
-		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= self.towers[tower].money:
+		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= self.towers[tower].money and not pos in self.field.targets:
 			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
 			if not self.update_paths():
 				self.field[pos[0], pos[1]].delete_tower()
