@@ -10,6 +10,7 @@ import yaml
 
 
 x = field(20,20, {0:(0,0)}, [(19,19)])
+x[0,1].make_unaccessible()
 x[2,2].make_unaccessible()
 yaml.dump(x, open("data/fields/field1.yaml", "w"))
 
@@ -19,7 +20,7 @@ yaml.dump(y, open("data/towers/laser_tower.yaml", "w"))
 z = tower("Small Tower", 2, 2, 2, 2)
 yaml.dump(z, open("data/towers/small_tower.yaml", "w"))
 
-a = attacker_type("Goblin", 32, 100, 100)
+a = attacker_type("Goblin", 10, 100, 100)
 yaml.dump(a, open("data/attacker/goblin.yaml", "w"))
 b = attacker_type("Orc", 2, 5, 5)
 yaml.dump(b, open("data/attacker/orc.yaml", "w"))

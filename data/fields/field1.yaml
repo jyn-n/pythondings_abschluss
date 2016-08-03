@@ -9,7 +9,7 @@ _tiles:
     next_tile: &id001 !!python/tuple [1, 0]
   ? !!python/tuple [0, 1]
   : !!python/object:core.data.field.tile
-    _accessible: true
+    _accessible: false
     _buildable: true
     _tower: null
     next_tile: *id001
@@ -2402,6 +2402,6 @@ _tiles:
     _tower: null
     next_tile: *id001
 spawn_points:
-  0: !!python/tuple [0, 0]
+  0: !!python/tuple [12, 12]
 targets:
-- !!python/tuple [19, 19]
+- !!python/tuple [0, 0]

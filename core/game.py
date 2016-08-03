@@ -38,6 +38,7 @@ class game:
 		self.current_attacker_id = 0
 		self.time = 0
 		self.life = lvl.life
+		self.update_paths()
 				
 	def place_tower(self, tower, pos):
 		atpl = True
@@ -46,6 +47,9 @@ class game:
 				atpl = False
 		if self.field[pos[0], pos[1]].is_buildable() and atpl:
 			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
+			if not self.update_paths():
+				self.field[pos[0], pos[1]].delete_tower()
+
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -65,17 +69,19 @@ class game:
 	
 	def move(self, i):
 		self.attacker[i].progress += self.attacker[i].attacker_type.speed
-		pos = self.exact_position(i)
-		self.attacker[i].position = (pos[0] // constants.distance, pos[1] // constants.distance)
-		self.attacker[i].progress = self.attacker[i].progress % constants.distance
-		for x in self.field.targets:
-			if self.attacker[i].position == x:
-				print("uaghb")
-				self.event(events.die, i)
-				self.event(events.loose_life, 1)
+		while i in self.attacker and self.attacker[i].progress >= constants.distance:
+			self.attacker[i].progress -= constants.distance
+			pos = self.attacker[i].position
+			dz = self.field[pos[0], pos[1]].next_tile
+			self.attacker[i].position = (pos[0] + dz[0], pos[1] + dz[1])
+			for x in self.field.targets:
+				if self.attacker[i].position == x:
+					self.event(events.die, i)
+					self.event(events.loose_life, 1)
 				
 	def move_all(self):
-		for i in self.attacker:
+		all_att = self.attacker.copy()
+		for i in all_att:
 			self.event(events.move, i)
 			
 	def exact_position(self, i):
@@ -99,7 +105,6 @@ class game:
 		del self.attacker[i]
 		
 	def take_damage(self, i, amount):
-		print(self.attacker[i].get_hp(), self.exact_position(i))
 		if self.attacker[i].take_damage(amount):
 			self.event(events.die, i)
 			
@@ -121,6 +126,7 @@ class game:
 		self.event(events.move_all)
 		if self.time in self.waves:
 			self.event(events.spawn_wave, self.waves[self.time])
+		self.event(events.fire_all)
 		self.time += 1
 		if self.has_won():
 			self.event(events.win)
@@ -129,7 +135,7 @@ class game:
 	def loose_life(self, amount):
 		self.life -= amount
 		if self.life <= 0:
-			self.event(event.loose)
+			self.event(events.loose)
 			
 	def has_won(self):
 		x = (len(self.attacker) == 0)
@@ -138,6 +144,7 @@ class game:
 		return x
 		
 	def update_paths(self):
+		old = copy.deepcopy(self.field)		
 		temp = {}
 		i = 0
 		temp[0] = []
@@ -150,10 +157,32 @@ class game:
 			for x in temp[i]:
 				for dz in [(-1, 0), (1,0), (0,-1), (0,1)]:
 					new_tile = (x[0] + dz[0], x[1] + dz[1])
-					if (new_tile in self.field) and not any(new_tile in l for l in temp.values()):
-						self.field[new_tile[0], new_tile[1]].next_tile = x
+					if (new_tile in self.field) and self.field[new_tile[0], new_tile[1]].is_accessible() and not any(new_tile in l for l in temp.values()):
+						self.field[new_tile[0], new_tile[1]].next_tile = (-dz[0], -dz[1])
 						temp[i+1].append(new_tile)
 						field_added = True
 			i += 1
+		for x in self.field:
+			if not any(x in l for l in temp.values()):
+				self.field[x[0], x[1]].next_tile = (0,0)
+		if not self.valid_paths():
+			self.field = old
+			return False
+		return True
+				
+				
+			
+	def valid_paths(self):
+		
+		relevant = self.field.targets.copy()
+		for i in self.attacker:
+			pos = self.attacker[i].position
+			if not pos in relevant:
+				relevant.append(pos)
+		for x in relevant:
+			if self.field[x[0], x[1]].next_tile == (0,0):
+				return False
+		return True
+			
 		
 

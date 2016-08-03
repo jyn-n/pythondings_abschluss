@@ -42,8 +42,7 @@ del r
 #testing stuff
 
 e ( events.load_level, "data/levels/1.yaml" )
-e (events.place_tower, "Laser Tower", (6,0))
-e (events.spawn_attacker, "Goblin", (0,0))
+
 
 #create main window
 app = QtGui.QApplication(sys.argv)
