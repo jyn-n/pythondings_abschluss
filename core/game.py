@@ -47,7 +47,9 @@ class game:
 				atpl = False
 		if self.field[pos[0], pos[1]].is_buildable() and atpl:
 			self.field[pos[0], pos[1]].add_tower(self.towers[tower])
-		self.update_paths()
+			if not self.update_paths():
+				self.field[pos[0], pos[1]].delete_tower()
+
 		
 	def spawn_wave(self, wave):
 		sp = wave.spawn_point
@@ -163,10 +165,24 @@ class game:
 		for x in self.field:
 			if not any(x in l for l in temp.values()):
 				self.field[x[0], x[1]].next_tile = (0,0)
+		if not self.valid_paths():
+			self.field = old
+			return False
+		return True
 				
 				
 			
 	def valid_paths(self):
-		pass
+		
+		relevant = self.field.targets.copy()
+		for i in self.attacker:
+			pos = self.attacker[i].position
+			if not pos in relevant:
+				relevant.append(pos)
+		for x in relevant:
+			if self.field[x[0], x[1]].next_tile == (0,0):
+				return False
+		return True
+			
 		
 
