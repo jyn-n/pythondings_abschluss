@@ -8,4 +8,4 @@ class ConsoleView (QtGui.QListWidget):
 
 	def submit (self, text):
 		self.addItem ( '>> ' + text )
-		self.setCurrentRow ( -1 )
+		self.setCurrentRow ( self.count() )

@@ -17,7 +17,7 @@ class main_window ( window_base_class, ui_main_window ):
 
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
-		#self._timer.start(interval)
+		self._timer.start(interval)
 
 	def set_event_callback (self, callback):
 		self._event = callback

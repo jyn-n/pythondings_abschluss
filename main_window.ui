@@ -56,6 +56,9 @@
     </property>
    </widget>
    <widget class="DebugConsole" name="console" native="true">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -76,7 +79,7 @@
     </widget>
     <widget class="ConsoleView" name="output">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
