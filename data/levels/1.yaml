@@ -2,7 +2,7 @@
 field: data/fields/field1.yaml
 life: 1
 starting_money: 10
-tower_types: [data/towers/laser_tower.yaml]
+tower_type: [data/towers/laser_tower.yaml]
 waves:
   1: !!python/object:core.data.wave.wave
     attacker: {Goblin: 5}

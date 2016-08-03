@@ -24,7 +24,7 @@ class game:
 		self.tower_type = {}
 		for x in lvl.tower_type:
 			twr = yaml.load(open(x, "r"))
-			self.towers_type[twr.name] = twr
+			self.tower_type[twr.name] = twr
 		self.waves = lvl.waves
 		
 		self.attacker_type = {}
