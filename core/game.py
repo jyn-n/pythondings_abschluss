@@ -12,6 +12,7 @@ import yaml
 import math
 import random
 import copy
+from pathlib import Path
 
 class game:
 	def __init__(self, event):
@@ -27,9 +28,14 @@ class game:
 			self.towers[twr.name] = twr
 		self.waves = lvl.waves
 		
-		
-		#TODO: load all attackers types (dict name:object)
-		self.attacker_type = {"Goblin":yaml.load(open("data/attacker/goblin.yaml", "r"))}
+		self.attacker_type = {}
+		att = Path("data/attacker").glob("*.yaml")
+		#self.attacker_type = {"Goblin":yaml.load(open("data/attacker/goblin.yaml", "r"))}
+		for x in att:
+			att2 = yaml.load(x.open())
+			self.attacker_type[att2.name] = att2
+			
+		print(self.attacker_type)
 		self.attacker = {}
 		self.current_attacker_id = 0
 		self.time = 0
