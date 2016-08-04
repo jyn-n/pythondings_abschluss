@@ -66,6 +66,7 @@ class game:
 	def spawn_attacker(self, name, pos):
 		enemy = self.attacker_type[name]
 		self.attacker[self.current_attacker_id] = attacker(enemy, pos)
+		self.attacker[self.current_attacker_id].progress = random.randrange(constants.distance // 2)
 		self.current_attacker_id += 1
 				
 	
