@@ -26,7 +26,7 @@ class GameBoardWidget (QtGui.QFrame):
 		return ( math.floor(self.width() / self.board_dimension()[0]) , math.floor(self.height() / self.board_dimension()[1]) )
 
 	def tile_position_pixels ( self, position ):
-		return ( x * y for (x,y) in zip (self.tile_size_pixels(), position) )
+		return tuple( x * y for (x,y) in zip (self.tile_size_pixels(), position) )
 
 	def tile_position ( self, position ):
 		r = tuple ( x + dx for (x,dx) in zip ( map ( lambda x,sx: math.floor ( x / sx ), position, self.tile_size_pixels() ) , self._position ) )
@@ -36,14 +36,20 @@ class GameBoardWidget (QtGui.QFrame):
 
 	def board_dimension ( self ):
 		return ( self._gamestate.field.size() )
-		#return ( math.floor(self.width() / 30), math.floor(self.height() / 30) ) #TODO
 
 	def paint_board ( self, painter ):
 		for p in itertools.product ( *( range(min(x,z), min(x+y, z)) for (x,y,z) in zip (self._position, self.board_dimension(), self._gamestate.field.size()) ) ):
 			self.paint_tile ( painter, self._gamestate.field[p], ( (dv - v) for (dv, v) in zip ( p , self._position ) ) )
 
-	def paint_tile ( self, painter, tile, position):
-		painter.fillRect ( * ( tuple(self.tile_position_pixels ( position )) + tuple(self.tile_size_pixels()) + (self.tile_brush ( tile ),) ) ) #this tuple + stuff is unnessecary as of python 3.5.2 (or maybe earlier), just use * instead
+	def tile_rect ( self, position ):
+		return QtCore.QRect ( *( self.tile_position_pixels (position) + self.tile_size_pixels())  )
+		#this + stuff is unnessecary as of python 3.5.2 (or maybe earlier), just use * instead
+
+	def paint_tile ( self, painter, tile, position ):
+		if tile.has_tower():
+			self.paint_tower ( painter, tile, position )
+		else:
+			painter.fillRect ( self.tile_rect (position) , self.tile_brush ( tile ))
  
 	def tile_brush ( self, tile ):
 		if ( tile.position in self._gamestate.field.targets ):
@@ -52,6 +58,11 @@ class GameBoardWidget (QtGui.QFrame):
 			return Qt.magenta
 		if ( tile.has_tower() ): return Qt.black
 		return { (True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
+
+	def paint_tower ( self, painter, tile, position ):
+		painter.drawImage ( self.tile_rect (position) , self._images['towers'][tile.get_tower().tower_type.name] )
+		#painter. #TODO
+		pass
 
 	def attacker_postition_pixels ( self, exact_position ):
 		return tuple(x * sx / constants.distance + sx / 2 for (x,sx) in zip ( exact_position, self.tile_size_pixels() ) )

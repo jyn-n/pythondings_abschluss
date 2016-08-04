@@ -6,8 +6,11 @@ import core.data.events as events
 
 import shlex
 import re
+from pathlib import Path
 
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
+
+image_path = 'images'
 
 class main_window ( window_base_class, ui_main_window ):
 
@@ -19,6 +22,8 @@ class main_window ( window_base_class, ui_main_window ):
 		self.setupUi(self)
 
 		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
+
+		self.load_images ( Path ( image_path ) )
 
 		self.set_event_callback (event_callback)
 		if gamestate != None:
@@ -116,3 +121,19 @@ class main_window ( window_base_class, ui_main_window ):
 	def show_tower_type ( self, tower_type ):
 		self.info.show_tower_type ( tower_type )
 
+	def load_images ( self , image_directory ):
+		self.board._images = main_window.load_directory (image_directory)
+
+	@staticmethod
+	def load_directory ( directory ):
+		r = dict ()
+		for f in directory.glob('*'):
+			r[f.stem] = main_window.load_file (f)
+		return r
+
+	@staticmethod
+	def load_file ( f ):
+		if f.is_dir():
+			return main_window.load_directory (f)
+		if f.is_file():
+			return QtGui.QImage (f.as_posix())
