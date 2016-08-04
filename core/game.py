@@ -39,6 +39,7 @@ class game:
 		self.life = lvl.life
 		self.update_paths()
 		self.money = lvl.starting_money
+		self.spawn_offset = math.floor(constants.distance * constants.offset)
 				
 	def place_tower(self, tower, pos):
 		atpl = True
@@ -66,7 +67,7 @@ class game:
 	def spawn_attacker(self, name, pos):
 		enemy = self.attacker_type[name]
 		self.attacker[self.current_attacker_id] = attacker(enemy, pos)
-		self.attacker[self.current_attacker_id].progress = random.randrange(constants.distance // 2)
+		self.attacker[self.current_attacker_id].progress = random.randrange(self.spawn_offset)
 		self.current_attacker_id += 1
 				
 	
