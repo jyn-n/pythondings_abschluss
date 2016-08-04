@@ -71,7 +71,11 @@ class main_window ( window_base_class, ui_main_window ):
 		self.repaint()
 
 	def game_board_clicked (self, position):
-		self._event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , (position.x(), position.y()) ) 
+		position = (position.x(), position.y()) #TODO pass a tuple to slot
+		if self._gamestate.field [position].has_tower ():
+			self.show_tower_type ( self._gamestate.field [position].get_tower().tower_type )
+		else:
+			self._event ( events.place_tower , str ( self.list_towers.currentItem().text() ) , position ) 
 
 	def submit_console (self, text):
 		self.submit_console_split ( *shlex.split(text) )
@@ -106,6 +110,9 @@ class main_window ( window_base_class, ui_main_window ):
 
 		super().keyPressEvent (event)
 
-	def show_tower_type ( self, tower_item ):
-		self.info.show_tower_type ( self._gamestate.towers_types[tower_item.text()] )
+	def show_tower_type_by_item ( self, tower_item ):
+		self.show_tower_type ( self._gamestate.tower_type[tower_item.text()] )
+
+	def show_tower_type ( self, tower_type ):
+		self.info.show_tower_type ( tower_type )
 

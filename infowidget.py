@@ -6,17 +6,17 @@ class Infowidget (QtGui.QTableWidget):
 		super().__init__(parent)
 
 	@staticmethod
-	def tower_type_type_data (tower_type):
-		return  (
-		  ('Name' , tower_type.name)
-		, ('Range' , tower_type.attack_range)
-		, ('Cooldown' , tower_type.attack_time)
-		, ('Cost' , tower_type.money)
-		, ('Damage' , tower_type.damage)
-		)
+	def tower_type_data (tower_type):
+		return (
+			  ('Name' , tower_type.name)
+			, ('Range' , tower_type.attack_range)
+			, ('Cooldown' , tower_type.attack_time)
+			, ('Cost' , tower_type.money)
+			, ('Damage' , tower_type.damage)
+			)
 
 	def show_tower_type ( self, tower_type ):
-		items = self.tower_data(tower_type)
+		items = self.tower_type_data(tower_type)
 		self.clear()
 
 		self.setRowCount(len(items))

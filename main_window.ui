@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1291</width>
+    <width>1808</width>
     <height>957</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>661</width>
+     <width>951</width>
      <height>941</height>
     </rect>
    </property>
@@ -35,9 +35,9 @@
   <widget class="QGroupBox" name="panel">
    <property name="geometry">
     <rect>
-     <x>710</x>
+     <x>1000</x>
      <y>10</y>
-     <width>531</width>
+     <width>771</width>
      <height>941</height>
     </rect>
    </property>
@@ -98,7 +98,7 @@
      <rect>
       <x>200</x>
       <y>60</y>
-      <width>301</width>
+      <width>551</width>
       <height>281</height>
      </rect>
     </property>
@@ -117,27 +117,27 @@
      <rect>
       <x>10</x>
       <y>580</y>
-      <width>501</width>
-      <height>341</height>
+      <width>741</width>
+      <height>351</height>
      </rect>
     </property>
     <widget class="ConsoleEdit" name="input">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
-       <width>481</width>
-       <height>31</height>
+       <y>310</y>
+       <width>731</width>
+       <height>20</height>
       </rect>
      </property>
     </widget>
     <widget class="ConsoleView" name="output">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>481</width>
-       <height>261</height>
+       <x>9</x>
+       <y>9</y>
+       <width>731</width>
+       <height>291</height>
       </rect>
      </property>
     </widget>
@@ -150,7 +150,7 @@
      <rect>
       <x>20</x>
       <y>350</y>
-      <width>481</width>
+      <width>731</width>
       <height>211</height>
      </rect>
     </property>
@@ -229,8 +229,8 @@
    <slot>submit_console(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>876</x>
-     <y>905</y>
+     <x>1166</x>
+     <y>915</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -245,12 +245,12 @@
    <slot>submit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>800</x>
-     <y>901</y>
+     <x>1090</x>
+     <y>911</y>
     </hint>
     <hint type="destinationlabel">
-     <x>793</x>
-     <y>860</y>
+     <x>1082</x>
+     <y>859</y>
     </hint>
    </hints>
   </connection>
@@ -261,7 +261,7 @@
    <slot>toggle_pause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>766</x>
+     <x>1056</x>
      <y>47</y>
     </hint>
     <hint type="destinationlabel">
@@ -274,15 +274,15 @@
    <sender>list_towers</sender>
    <signal>itemActivated(QListWidgetItem*)</signal>
    <receiver>Form</receiver>
-   <slot>show_tower_type(QListWidgetItem*)</slot>
+   <slot>show_tower_type_by_item(QListWidgetItem*)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>772</x>
+     <x>1062</x>
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
-     <x>693</x>
-     <y>190</y>
+     <x>970</x>
+     <y>209</y>
     </hint>
    </hints>
   </connection>
@@ -292,6 +292,6 @@
   <slot>game_board_clicked(QPoint)</slot>
   <slot>submit_console(QString)</slot>
   <slot>toggle_pause()</slot>
-  <slot>show_tower_type(QListWidgetItem*)</slot>
+  <slot>show_tower_type_by_item(QListWidgetItem*)</slot>
  </slots>
 </ui>
