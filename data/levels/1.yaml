@@ -1,8 +1,8 @@
 !!python/object:core.data.level.level
-field: data/fields/field1.yaml
+field: Field1
 life: 1
 starting_money: 10
-tower_type: [data/towers/laser_tower.yaml]
+tower_type: [Laser Tower]
 waves:
   1: !!python/object:core.data.wave.wave
     attacker: {Goblin: 5}

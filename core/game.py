@@ -18,12 +18,12 @@ class game:
 	def __init__(self, event):
 		self.event = event
 	
-	def load_level(self, level): #level is the path of the level file
-		lvl = yaml.load(open(level, "r"))
-		self.field = yaml.load(open(lvl.field, "r"))
+	def load_level(self, level): #level is the name of the level file
+		lvl = yaml.load(open("data/levels/" + level + ".yaml", "r"))
+		self.field = yaml.load(open("data/fields/"+lvl.field+".yaml", "r"))
 		self.tower_type = {}
 		for x in lvl.tower_type:
-			twr = yaml.load(open(x, "r"))
+			twr = yaml.load(open("data/towers/" + x + ".yaml", "r"))
 			self.tower_type[twr.name] = twr
 		self.waves = lvl.waves
 		
