@@ -22,24 +22,25 @@ class main_window ( window_base_class, ui_main_window ):
 		ui_main_window.__init__(self)
 		self.setupUi(self)
 
-		self.input.ignore_keys ( Qt.Key_QuoteLeft )
-		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
-
-
-		self.level_load.setFocus()
-		self.level_load.add_completion_items ( tuple ( f.stem for f in Path(level_directory) if f.is_file() ) )
-
-		self.load_images ( Path ( image_path ) )
-
 		self.set_event_callback (event_callback)
-		if gamestate != None:
-			self.init_gamestate(gamestate)
-
-		self.console.setVisible(False)
 
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
 		self._timer.setInterval(interval)
+
+		self.input.ignore_keys ( Qt.Key_QuoteLeft )
+		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
+
+
+#		self.level_load.setFocus()
+#		self.level_load.add_completion_items ( tuple ( f.stem for f in Path(level_directory) if f.is_file() ) )
+
+		self.load_images ( Path ( image_path ) )
+
+		if gamestate != None:
+			self.init_gamestate(gamestate)
+
+		self.console.setVisible(False)
 
 	def toggle_pause (self):
 		if self._timer.isActive():
@@ -63,10 +64,14 @@ class main_window ( window_base_class, ui_main_window ):
 		self.waves.clear()
 
 		self.waves.setColumnCount (4)
-		self.waves.setRowCount (functools.reduce ( (lambda x,y: len(waves[x].attacker) + len(waves[y].attacker)), waves ) )
+		n = 0
+		for wave in waves:
+			n += len(waves[wave].attacker)
+		self.waves.setRowCount(n)
+		#self.waves.setRowCount (functools.reduce ( (lambda x,y: (len(waves[x].attacker) + len(waves[y].attacker))), waves ) ) #TODO wtf
 
 		i = 0
-		for wave in waves:
+		for wave in sorted(waves):
 			self.waves.setItem ( i, 0, QtGui.QTableWidgetItem ( str(wave) ) )
 			self.waves.setItem ( i, 1, QtGui.QTableWidgetItem ( str(waves[wave].spawn_point) ) )
 			for attacker in waves[wave].attacker:

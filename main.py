@@ -45,7 +45,7 @@ del r
 
 #testing stuff
 
-e ( events.load_level, "1" )
+e ( events.load_level, "demo_level" )
 
 #create main window
 app = QtGui.QApplication(sys.argv)

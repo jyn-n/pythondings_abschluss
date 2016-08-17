@@ -11,7 +11,7 @@ waves:
     attacker: {Zombie: 20, Emo: 5}
     spawn_point: 1
   430: !!python/object:core.data.wave.wave
-    attacker: Lady: 13, Emo: 7}
+    attacker: {Lady: 13, Emo: 7}
     spawn_point: 0
   580: !!python/object:core.data.wave.wave
     attacker: {Zombie: 40}
