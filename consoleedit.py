@@ -9,6 +9,7 @@ class ConsoleEdit (QtGui.QLineEdit):
 		super().__init__(parent)
 		self._completion_items = tuple()
 		self._history = tuple()
+		self._ignore_keys = tuple()
 		self.reset()
 
 	def reset ( self , text=True):
@@ -24,6 +25,9 @@ class ConsoleEdit (QtGui.QLineEdit):
 
 	def add_completion_items ( self, items ):
 		self._completion_items += items
+
+	def ignore_keys ( self, *keys ):
+		self._ignore_keys += keys
 
 	def autocomplete ( self ):
 		c = False
@@ -72,6 +76,10 @@ class ConsoleEdit (QtGui.QLineEdit):
 				Qt.Key_Up : self.next_history ,
 				Qt.Key_Down : self.prev_history
 			}
+
+		if event.key() in self._ignore_keys:
+			event.ignore()
+			return
 
 		if event.key() in actions:
 			actions[event.key()]()

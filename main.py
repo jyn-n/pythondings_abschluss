@@ -45,7 +45,7 @@ del r
 
 #testing stuff
 
-e ( events.load_level, "data/levels/1.yaml" )
+e ( events.load_level, "1" )
 
 #create main window
 app = QtGui.QApplication(sys.argv)

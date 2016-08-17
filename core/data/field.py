@@ -48,7 +48,9 @@ class tile:
 		
 	def make_unbuildable(self):
 		self._buildable = False
-		
+
+	def name ( self ):
+		return str(self.is_accessible()) + str (self.is_buildable())
 
 class field:
 	def __init__(self, n, m, spawn_points, targets):

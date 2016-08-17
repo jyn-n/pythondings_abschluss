@@ -21,6 +21,7 @@ class main_window ( window_base_class, ui_main_window ):
 		ui_main_window.__init__(self)
 		self.setupUi(self)
 
+		self.input.ignore_keys ( Qt.Key_QuoteLeft )
 		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
 
 		self.load_images ( Path ( image_path ) )
@@ -45,29 +46,38 @@ class main_window ( window_base_class, ui_main_window ):
 	def set_event_callback (self, callback):
 		self._event = callback
 
+	def init_list_towers ( self , tower_types):
+		self.list_towers.clear()
+		for tower in tower_types:
+			self.list_towers.addItem (tower)
+
+	def init_wave_view ( self , waves ):
+		self.waves.clear()
+
+		self.waves.setColumnCount (4)
+		self.waves.setRowCount (functools.reduce ( (lambda x,y: len(waves[x].attacker) + len(waves[y].attacker)), waves ) )
+
+		i = 0
+		for wave in waves:
+			self.waves.setItem ( i, 0, QtGui.QTableWidgetItem ( str(wave) ) )
+			self.waves.setItem ( i, 1, QtGui.QTableWidgetItem ( str(waves[wave].spawn_point) ) )
+			for attacker in waves[wave].attacker:
+				self.waves.setItem ( i, 2, QtGui.QTableWidgetItem ( attacker ) )
+				self.waves.setItem ( i, 3, QtGui.QTableWidgetItem ( str ( waves[wave].attacker [attacker] ) ) )
+				i += 1
+
 	def init_gamestate (self, gamestate):
 		self.board.update_gamestate(gamestate)
 
-		for tower in gamestate.tower_type:
-			self.list_towers.addItem (tower)
-
-		self.waves.setColumnCount (4)
-		self.waves.setRowCount (functools.reduce ( (lambda x,y: len(gamestate.waves[x].attacker) + len(gamestate.waves[y].attacker)), gamestate.waves ) )
-
-		i = 0
-		for wave in gamestate.waves:
-			self.waves.setItem ( i, 0, QtGui.QTableWidgetItem ( str(wave) ) )
-			self.waves.setItem ( i, 1, QtGui.QTableWidgetItem ( str(gamestate.waves[wave].spawn_point) ) )
-			for attacker in gamestate.waves[wave].attacker:
-				self.waves.setItem ( i, 2, QtGui.QTableWidgetItem ( attacker ) )
-				self.waves.setItem ( i, 3, QtGui.QTableWidgetItem ( str ( gamestate.waves[wave].attacker [attacker] ) ) )
-				i += 1
+		self.init_list_towers (gamestate.tower_type)
+		self.init_wave_view (gamestate.waves)
 
 		self.update_gamestate ( gamestate )
 
 	def draw_gamestate ( self , gamestate ):
 		self.money.setText ( str (gamestate.money) )
 		self.life.setText ( str (gamestate.life) )
+		self.time.setText ( str (gamestate.time) )
 
 	def update_gamestate (self, gamestate):
 		self._gamestate = gamestate
@@ -107,9 +117,14 @@ class main_window ( window_base_class, ui_main_window ):
 	def submit_console_split (self, event_name, *args):
 		self.event_answer.emit ( str ( self._event ( event_name, *self.parse_args(*args) ) ) )
 
+	def toggle_console_visibility ( self ):
+		self.console.setVisible ( not self.console.isVisible() )
+		if self.console.isVisible():
+			self.input.setFocus()
+
 	def keyPressEvent ( self, event ):
 		if event.key() == Qt.Key_QuoteLeft:
-			self.console.setVisible ( not self.console.isVisible() ) #TODO
+			self.toggle_console_visibility()
 			event.accept()
 			return
 

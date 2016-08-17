@@ -49,8 +49,8 @@ class GameBoardWidget (QtGui.QFrame):
 		if tile.has_tower():
 			self.paint_tower ( painter, tile, position )
 		else:
-			painter.fillRect ( self.tile_rect (position) , self.tile_brush ( tile ))
- 
+			painter.drawImage ( self.tile_rect (position) , self._images['tiles'][tile.name()] )
+
 	def tile_brush ( self, tile ):
 		if ( tile.position in self._gamestate.field.targets ):
 			return Qt.darkRed
@@ -61,8 +61,6 @@ class GameBoardWidget (QtGui.QFrame):
 
 	def paint_tower ( self, painter, tile, position ):
 		painter.drawImage ( self.tile_rect (position) , self._images['towers'][tile.get_tower().tower_type.name] )
-		#painter. #TODO
-		pass
 
 	def attacker_postition_pixels ( self, exact_position ):
 		return tuple(x * sx / constants.distance + sx / 2 for (x,sx) in zip ( exact_position, self.tile_size_pixels() ) )
