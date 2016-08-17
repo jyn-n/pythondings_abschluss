@@ -1,0 +1,35 @@
+!!python/object:core.data.level.level
+field: Field1
+life: 20
+starting_money: 300
+tower_type: [Crap Tower, Chinese Tower, Manure Tower, Tele Tower, Eiffel Tower]
+waves:
+  20: !!python/object:core.data.wave.wave
+    attacker: {Zombie: 20, Emo: 5}
+    spawn_point: 0
+  21: !!python/object:core.data.wave.wave
+    attacker: {Zombie: 20, Emo: 5}
+    spawn_point: 1
+  430: !!python/object:core.data.wave.wave
+    attacker: {Lady: 13, Emo: 7}
+    spawn_point: 0
+  580: !!python/object:core.data.wave.wave
+    attacker: {Zombie: 40}
+    spawn_point: 1
+  600: !!python/object:core.data.wave.wave
+    attacker: {Long Leg: 8}
+    spawn_point: 0
+  820: !!python/object:core.data.wave.wave
+    attacker: {Emo: 30}
+    spawn_point: 0
+  1100: !!python/object:core.data.wave.wave
+    attacker: {Fattie: 20}
+    spawn_point: 1
+  1101: !!python/object:core.data.wave.wave
+    attacker: {Fattie: 20}
+    spawn_point: 0
+  
+
+
+
+
