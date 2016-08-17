@@ -1,2 +1,0 @@
-!!python/object:core.data.attacker_type.attacker_type {hp: 5, money: 5, name: Orc,
-  speed: 2}

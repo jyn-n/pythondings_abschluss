@@ -1,0 +1,2 @@
+!!python/object:core.data.attacker_type.attacker_type {hp: 1500, money: 40, name: Fattie,
+  speed: 10}
