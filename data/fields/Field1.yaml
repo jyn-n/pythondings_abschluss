@@ -985,7 +985,7 @@ _tiles:
   ? !!python/tuple [5, 4]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -994,7 +994,7 @@ _tiles:
   ? !!python/tuple [5, 5]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1003,7 +1003,7 @@ _tiles:
   ? !!python/tuple [5, 6]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1012,7 +1012,7 @@ _tiles:
   ? !!python/tuple [5, 7]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1021,7 +1021,7 @@ _tiles:
   ? !!python/tuple [5, 8]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1030,7 +1030,7 @@ _tiles:
   ? !!python/tuple [5, 9]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1039,7 +1039,7 @@ _tiles:
   ? !!python/tuple [5, 10]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1048,7 +1048,7 @@ _tiles:
   ? !!python/tuple [5, 11]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1057,7 +1057,7 @@ _tiles:
   ? !!python/tuple [5, 12]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1066,7 +1066,7 @@ _tiles:
   ? !!python/tuple [5, 13]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1075,7 +1075,7 @@ _tiles:
   ? !!python/tuple [5, 14]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1084,7 +1084,7 @@ _tiles:
   ? !!python/tuple [5, 15]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null
@@ -1093,7 +1093,7 @@ _tiles:
   ? !!python/tuple [5, 16]
   : !!python/object:core.data.field.tile
     _accessible: true
-    _buildable: true
+    _buildable: false
     _spawn_point: false
     _target: false
     _tower: null

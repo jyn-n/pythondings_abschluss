@@ -15,7 +15,7 @@ for i in range(5,16):
 	x[6,i].make_unaccessible()
 		
 for i in range(4,17):
-	for j in range(6,8):
+	for j in range(5,8):
 		x[j,i].make_unbuildable()
 	
 for i in range(8, 13):
@@ -38,17 +38,3 @@ for i in range(11, 28):
 yaml.dump(x, open("data/fields/Field1.yaml", "w"))
 
 
-
-y = tower_type("Laser Tower", 5000, 1, 2, 7)
-yaml.dump(y, open("data/towers/Laser Tower.yaml", "w"))
-z = tower_type("Small Tower", 2, 2, 2, 2)
-yaml.dump(z, open("data/towers/Small Tower.yaml", "w"))
-
-a = attacker_type("Goblin", 10, 100, 100)
-yaml.dump(a, open("data/attacker/Goblin.yaml", "w"))
-b = attacker_type("Orc", 2, 5, 5)
-yaml.dump(b, open("data/attacker/Orc.yaml", "w"))
-
-c = level(["Laser Tower"], "Field1",
-	{1 : wave({"Goblin":5}, 0), 2 : wave({"Goblin":3, "Orc": 5}, 0)}, 1, 10)
-yaml.dump(c, open("data/levels/1.yaml", "w"))
