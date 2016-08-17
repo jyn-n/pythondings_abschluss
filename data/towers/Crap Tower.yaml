@@ -1,0 +1,2 @@
+!!python/object:core.data.tower_type.tower_type {attack_range: 2000, attack_time: 5,
+  damage: 3, money: 5, name: Crap Tower}

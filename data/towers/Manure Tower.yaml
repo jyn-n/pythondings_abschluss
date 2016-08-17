@@ -1,0 +1,2 @@
+!!python/object:core.data.tower_type.tower_type {attack_range: 5000, attack_time: 50,
+  damage: 200, money: 25, name: Manure Tower}

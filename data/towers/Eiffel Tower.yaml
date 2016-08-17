@@ -1,0 +1,2 @@
+!!python/object:core.data.tower_type.tower_type {attack_range: 4000, attack_time: 4,
+  damage: 30, money: 80, name: Eiffel Tower}

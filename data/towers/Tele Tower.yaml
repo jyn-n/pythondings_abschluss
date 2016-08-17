@@ -1,0 +1,2 @@
+!!python/object:core.data.tower_type.tower_type {attack_range: 10000, attack_time: 1,
+  damage: 2, money: 20, name: Tele Tower}

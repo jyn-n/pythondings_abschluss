@@ -1,2 +1,0 @@
-!!python/object:core.data.tower_type.tower_type {attack_range: 2, attack_time: 2,
-  damage: 2, money: 2, name: Small Tower}
