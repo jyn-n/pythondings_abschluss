@@ -16,173 +16,173 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="GameBoardWidget" name="board">
-   <property name="geometry">
-    <rect>
-     <x>9</x>
-     <y>9</y>
-     <width>1321</width>
-     <height>941</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="DebugConsole" name="console" native="true">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>690</y>
-      <width>761</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="ConsoleView" name="output"/>
-     </item>
-     <item>
-      <widget class="ConsoleEdit" name="input"/>
-     </item>
-    </layout>
-   </widget>
-   <zorder>output</zorder>
-   <zorder>console</zorder>
-  </widget>
-  <widget class="QFrame" name="frame">
-   <property name="geometry">
-    <rect>
-     <x>1340</x>
-     <y>10</y>
-     <width>461</width>
-     <height>941</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0" colspan="5">
-     <widget class="Infowidget" name="info">
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Time</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0" colspan="5">
-     <widget class="QTableWidget" name="waves">
-      <property name="rowCount">
-       <number>1</number>
-      </property>
-      <property name="columnCount">
-       <number>4</number>
-      </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <row/>
-      <column/>
-      <column/>
-      <column/>
-      <column/>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="life">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Life</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Money</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QLabel" name="money">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QLabel" name="time">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="pause_button">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Pause</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="5">
-     <widget class="QListWidget" name="list_towers">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <zorder>board</zorder>
-  <zorder>frame</zorder>
-  <zorder>output</zorder>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="GameBoardWidget" name="board" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pause_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Pause</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" colspan="3">
+       <widget class="Infowidget" name="info">
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2">
+       <widget class="QWidget" name="infopanel" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Life</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="life">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Time</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="time">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Money</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="money">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="3">
+       <widget class="QTableWidget" name="waves">
+        <property name="minimumSize">
+         <size>
+          <width>404</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="rowCount">
+         <number>1</number>
+        </property>
+        <property name="columnCount">
+         <number>4</number>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <row/>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="3">
+       <widget class="QListWidget" name="list_towers">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="DebugConsole" name="console" native="true">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="ConsoleView" name="output"/>
+      </item>
+      <item>
+       <widget class="ConsoleEdit" name="input"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>GameBoardWidget</class>
-   <extends>QFrame</extends>
-   <header>gameboardwidget.h</header>
-   <container>1</container>
-   <slots>
-    <signal>click(QPoint)</signal>
-   </slots>
-  </customwidget>
   <customwidget>
    <class>ConsoleEdit</class>
    <extends>QLineEdit</extends>
@@ -213,57 +213,18 @@
    <extends>QTableWidget</extends>
    <header>infowidget.h</header>
   </customwidget>
+  <customwidget>
+   <class>GameBoardWidget</class>
+   <extends>QWidget</extends>
+   <header>gameboardwidget.h</header>
+   <container>1</container>
+   <slots>
+    <signal>click(QPoint)</signal>
+   </slots>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>board</sender>
-   <signal>click(QPoint)</signal>
-   <receiver>Form</receiver>
-   <slot>game_board_clicked(QPoint)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>70</x>
-     <y>403</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1</x>
-     <y>390</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>input</sender>
-   <signal>submit(QString)</signal>
-   <receiver>Form</receiver>
-   <slot>submit_console(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>164</x>
-     <y>936</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>2</x>
-     <y>671</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>input</sender>
-   <signal>submit(QString)</signal>
-   <receiver>output</receiver>
-   <slot>submit(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>88</x>
-     <y>932</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>81</x>
-     <y>914</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>pause_button</sender>
    <signal>clicked()</signal>
@@ -271,8 +232,8 @@
    <slot>toggle_pause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1377</x>
-     <y>38</y>
+     <x>1410</x>
+     <y>51</y>
     </hint>
     <hint type="destinationlabel">
      <x>695</x>
@@ -293,6 +254,54 @@
     <hint type="destinationlabel">
      <x>1335</x>
      <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>input</sender>
+   <signal>submit(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>submit_console(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1248</x>
+     <y>934</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>671</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>input</sender>
+   <signal>submit(QString)</signal>
+   <receiver>output</receiver>
+   <slot>submit(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1172</x>
+     <y>930</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>224</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>board</sender>
+   <signal>click(QPoint)</signal>
+   <receiver>Form</receiver>
+   <slot>game_board_clicked(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>966</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1089</x>
+     <y>5</y>
     </hint>
    </hints>
   </connection>

@@ -7,7 +7,7 @@ import core.data.constants as constants
 import itertools
 import math
 
-class GameBoardWidget (QtGui.QFrame):
+class GameBoardWidget (QtGui.QWidget):
 
 	click = QtCore.pyqtSignal(QtCore.QPoint)
 
