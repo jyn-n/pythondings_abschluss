@@ -28,7 +28,7 @@ waves:
   1101: !!python/object:core.data.wave.wave
     attacker: {Fattie: 20}
     spawn_point: 0
- 
+  
 
 
 
