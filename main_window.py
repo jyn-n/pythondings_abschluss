@@ -11,6 +11,7 @@ from pathlib import Path
 ui_main_window, window_base_class = uic.loadUiType("main_window.ui") #TODO make path relative to own directory
 
 image_path = 'images'
+level_directory = 'data/levels'
 
 class main_window ( window_base_class, ui_main_window ):
 
@@ -24,6 +25,10 @@ class main_window ( window_base_class, ui_main_window ):
 		self.input.ignore_keys ( Qt.Key_QuoteLeft )
 		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
 
+
+		self.level_load.setFocus()
+		self.level_load.add_completion_items ( tuple ( f.stem for f in Path(level_directory) if f.is_file() ) )
+
 		self.load_images ( Path ( image_path ) )
 
 		self.set_event_callback (event_callback)
@@ -35,7 +40,6 @@ class main_window ( window_base_class, ui_main_window ):
 		self._timer = QtCore.QTimer()
 		self._timer.timeout.connect ( functools.partial (self._event, events.tick) )
 		self._timer.setInterval(interval)
-		self._timer.start()
 
 	def toggle_pause (self):
 		if self._timer.isActive():
@@ -45,6 +49,9 @@ class main_window ( window_base_class, ui_main_window ):
 
 	def set_event_callback (self, callback):
 		self._event = callback
+
+	def load_level (self, name):
+		self._event(events.load_level, name)
 
 	def init_list_towers ( self , tower_types):
 		self.list_towers.clear()
@@ -73,6 +80,8 @@ class main_window ( window_base_class, ui_main_window ):
 
 		self.init_list_towers (gamestate.tower_type)
 		self.init_wave_view (gamestate.waves)
+
+		self._timer.start()
 
 	def draw_gamestate ( self , gamestate ):
 		self.money.setText ( str (gamestate.money) )
