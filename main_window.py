@@ -50,6 +50,7 @@ class main_window ( window_base_class, ui_main_window ):
 		self.list_towers.clear()
 		for tower in tower_types:
 			self.list_towers.addItem (tower)
+		self.list_towers.setCurrentRow(0)
 
 	def init_wave_view ( self , waves ):
 		self.waves.clear()
@@ -68,11 +69,10 @@ class main_window ( window_base_class, ui_main_window ):
 
 	def init_gamestate (self, gamestate):
 		self.board.update_gamestate(gamestate)
+		self.update_gamestate ( gamestate )
 
 		self.init_list_towers (gamestate.tower_type)
 		self.init_wave_view (gamestate.waves)
-
-		self.update_gamestate ( gamestate )
 
 	def draw_gamestate ( self , gamestate ):
 		self.money.setText ( str (gamestate.money) )
@@ -131,10 +131,19 @@ class main_window ( window_base_class, ui_main_window ):
 		super().keyPressEvent (event)
 
 	def show_tower_type_by_item ( self, tower_item ):
-		self.show_tower_type ( self._gamestate.tower_type[tower_item.text()] )
+		return self.show_tower_type ( self._gamestate.tower_type[tower_item.text()] )
 
 	def show_tower_type ( self, tower_type ):
-		self.info.show_tower_type ( tower_type )
+		self.tower_type_info.show_tower_type ( tower_type )
+
+	def show_attacker_type_by_item ( self, attacker_item ):
+		return self.show_attacker_type ( self._gamestate.attacker_type[attacker_item.text()] )
+
+	def show_attacker_type_by_row ( self, row ):
+		return self.show_attacker_type_by_item ( self.waves.item (row, 2) )
+
+	def show_attacker_type ( self, attacker_type ):
+		self.attacker_type_info.show_attacker_type ( attacker_type )
 
 	def load_images ( self , image_directory ):
 		self.board._images = main_window.load_directory (image_directory)

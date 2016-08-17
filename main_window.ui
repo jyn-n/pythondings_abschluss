@@ -17,6 +17,27 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="1">
+    <widget class="DebugConsole" name="console" native="true">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="ConsoleView" name="output"/>
+      </item>
+      <item>
+       <widget class="ConsoleEdit" name="input"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="GameBoardWidget" name="board" native="true">
      <property name="sizePolicy">
@@ -25,12 +46,14 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <zorder>infopanel</zorder>
+     <zorder>controlpanel</zorder>
     </widget>
    </item>
    <item row="0" column="2">
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="controlpanel">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -42,90 +65,175 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pause_button">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Pause</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="3">
-       <widget class="Infowidget" name="info">
-        <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2">
+      <item row="0" column="3" colspan="2">
        <widget class="QWidget" name="infopanel" native="true">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
+         <item row="0" column="0" rowspan="3">
+          <widget class="QPushButton" name="pause_button">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
-            <string>Life</string>
+            <string>Pause</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="life">
+         <item row="0" column="5">
+          <widget class="QLabel" name="time">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>TextLabel</string>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="label_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
-            <string>Time</string>
+            <string>Life</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QLabel" name="time">
+          <widget class="QLabel" name="life">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>TextLabel</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_4">
+         <item row="0" column="4">
+          <widget class="QLabel" name="label_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
-            <string>Money</string>
+            <string>Time</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="3">
           <widget class="QLabel" name="money">
            <property name="text">
             <string>TextLabel</string>
            </property>
           </widget>
          </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Money</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="3">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>10</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </widget>
       </item>
-      <item row="3" column="1" colspan="3">
+      <item row="2" column="3" colspan="2">
+       <widget class="QListWidget" name="list_towers">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>true</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3" colspan="2">
        <widget class="QTableWidget" name="waves">
-        <property name="minimumSize">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="baseSize">
          <size>
           <width>404</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
         <property name="rowCount">
          <number>1</number>
@@ -146,36 +254,91 @@
         <column/>
        </widget>
       </item>
-      <item row="2" column="1" colspan="3">
-       <widget class="QListWidget" name="list_towers">
+      <item row="4" column="3">
+       <widget class="Infowidget" name="tower_type_info">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>205</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>205</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="DebugConsole" name="console" native="true">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="ConsoleView" name="output"/>
-      </item>
-      <item>
-       <widget class="ConsoleEdit" name="input"/>
+      <item row="4" column="4">
+       <widget class="Infowidget" name="attacker_type_info">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>205</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>205</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -305,6 +468,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>waves</sender>
+   <signal>currentCellChanged(int,int,int,int)</signal>
+   <receiver>Form</receiver>
+   <slot>show_attacker_type_by_row(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1383</x>
+     <y>515</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1362</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_attacker_type(int)</slot>
@@ -312,5 +491,7 @@
   <slot>submit_console(QString)</slot>
   <slot>toggle_pause()</slot>
   <slot>show_tower_type_by_item(QListWidgetItem*)</slot>
+  <slot>show_attacker_type_by_item(QTableWidgetItem*)</slot>
+  <slot>show_attacker_type_by_row(int)</slot>
  </slots>
 </ui>

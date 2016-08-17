@@ -58,7 +58,7 @@ class tile:
 		self._buildable = False
 
 	def name ( self ):
-		return str(self.is_accessible()) + str (self.is_buildable())
+		return str(self._accessible) + str (self._buildable)
 
 class field:
 	def __init__(self, n, m, spawn_points, targets):

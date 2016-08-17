@@ -15,8 +15,22 @@ class Infowidget (QtGui.QTableWidget):
 			, ('Damage' , tower_type.damage)
 			)
 
+	@staticmethod
+	def attacker_type_data (attacker_type):
+		return (
+			  ('Name' , attacker_type.name)
+			, ('Speed' , attacker_type.speed)
+			, ('Maximum Life' , attacker_type.hp)
+			, ('Value' , attacker_type.money)
+			)
+
 	def show_tower_type ( self, tower_type ):
-		items = self.tower_type_data(tower_type)
+		return self.show_data ( self.tower_type_data (tower_type) )
+
+	def show_attacker_type ( self, attacker_type ):
+		return self.show_data ( self.attacker_type_data (attacker_type) )
+
+	def show_data ( self, items ):
 		self.clear()
 
 		self.setRowCount(len(items))

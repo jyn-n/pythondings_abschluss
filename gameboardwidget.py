@@ -39,36 +39,43 @@ class GameBoardWidget (QtGui.QWidget):
 
 	def paint_board ( self, painter ):
 		for p in itertools.product ( *( range(min(x,z), min(x+y, z)) for (x,y,z) in zip (self._position, self.board_dimension(), self._gamestate.field.size()) ) ):
-			self.paint_tile ( painter, self._gamestate.field[p], ( (dv - v) for (dv, v) in zip ( p , self._position ) ) )
+			self.paint_tile ( painter, self._gamestate.field[p], tuple( (dv - v) for (dv, v) in zip ( p , self._position ) ) )
 
 	def tile_rect ( self, position ):
 		return QtCore.QRect ( *( self.tile_position_pixels (position) + self.tile_size_pixels())  )
 		#this + stuff is unnessecary as of python 3.5.2 (or maybe earlier), just use * instead
 
-	def paint_tile ( self, painter, tile, position ):
+	def tile_image ( self, tile ):
+		return self._images['tiles'][tile.name()]
+
+	def tile_overlay_image ( self, tile ):
 		if tile.has_tower():
-			self.paint_tower ( painter, tile, position )
-		else:
-			painter.drawImage ( self.tile_rect (position) , self._images['tiles'][tile.name()] )
+			return self._images['towers'][tile.get_tower().tower_type.name]
 
-	def tile_brush ( self, tile ):
-		if ( tile.position in self._gamestate.field.targets ):
-			return Qt.darkRed
-		if ( tile.position in self._gamestate.field.spawn_points.values() ):
-			return Qt.magenta
-		if ( tile.has_tower() ): return Qt.black
-		return { (True,True):Qt.blue, (True,False):Qt.green, (False,True):Qt.red, (False,False):Qt.yellow } [ tile.is_accessible(), tile.is_buildable() ] #TODO
+		if tile.is_spawn_point():
+			return self._images['tiles']['Spawnpoint']
 
-	def paint_tower ( self, painter, tile, position ):
-		painter.drawImage ( self.tile_rect (position) , self._images['towers'][tile.get_tower().tower_type.name] )
+		if tile.is_target():
+			return self._images['tiles']['Target']
+
+		return None
+
+	def paint_tile ( self, painter, tile, position ):
+		painter.drawImage ( self.tile_rect (position) , self.tile_image (tile) )
+		overlay = self.tile_overlay_image ( tile )
+		if overlay != None:
+			painter.drawImage ( self.tile_rect (position) , self.tile_overlay_image (tile) )
 
 	def attacker_postition_pixels ( self, exact_position ):
 		return tuple(x * sx / constants.distance + sx / 2 for (x,sx) in zip ( exact_position, self.tile_size_pixels() ) )
 
+	def attacker_rect ( self, attacker, position_pixels ):
+		ratio = 4
+		return QtCore.QRect (*(tuple(v - dv // ratio for (v,dv) in zip ( position_pixels , self.tile_size_pixels() )) + tuple((v // ratio) * 2 for v in self.tile_size_pixels())))
+
 	def paint_attacker ( self, painter, attacker ):
 		position = self.attacker_postition_pixels ( self._gamestate.exact_position ( attacker ) )
-		painter.setBrush (QtCore.Qt.white)
-		painter.drawEllipse(QtCore.QPointF ( *position ) , 5, 5 )  #TODO
+		painter.drawImage ( self.attacker_rect (attacker, position) , self._images['attacker'][self._gamestate.attacker[attacker].name] )
 
 	def paint_attackers ( self, painter ):
 		for attacker in self._gamestate.attacker:
