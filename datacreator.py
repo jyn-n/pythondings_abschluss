@@ -9,10 +9,34 @@ from core import *
 import yaml
 
 
-x = field(10,20, {0:(0,0)}, [(1,1)])
-x[0,1].make_unaccessible()
-x[2,2].make_unaccessible()
+x = field(35,21, {0:(0,4), 1: (0,17)}, [(34,10)])
+
+for i in range(5,16):
+	x[6,i].make_unaccessible()
+		
+for i in range(4,17):
+	for j in range(6,8):
+		x[j,i].make_unbuildable()
+	
+for i in range(8, 13):
+	for j in range(10, 20):
+		x[j,i].make_unaccessible()
+		
+for i in range(7):
+	x[28,i].make_unaccessible()
+	x[28,i].make_unbuildable()
+	
+for i in range(14, 21):
+	x[28,i].make_unaccessible()
+	x[28,i].make_unbuildable()
+	
+for i in range(11, 28):
+	for j in range(4):
+		x[i,j].make_unaccessible()
+	for j in range(17, 21):
+		x[i,j].make_unaccessible()
 yaml.dump(x, open("data/fields/Field1.yaml", "w"))
+
 
 
 y = tower_type("Laser Tower", 5000, 1, 2, 7)

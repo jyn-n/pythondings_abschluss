@@ -6,12 +6,14 @@ Created on Sun Jul 24 15:21:45 2016
 """
 from .tower import tower
 class tile:
-	def __init__(self, pos):
+	def __init__(self, pos, sp, target):
 		self._accessible = True
 		self._buildable = True
 		self._tower = None
 		self.next_tile = (1,0)
 		self.position = pos
+		self._spawn_point = sp
+		self._target = target
 		
 	def add_tower(self, twr):
 		if self._tower == None:
@@ -36,6 +38,12 @@ class tile:
 		
 	def is_buildable(self):
 		return self._buildable and not self.has_tower()
+	
+	def is_target(self):
+		return self._target
+		
+	def is_spawn_point(self):
+		return self._spawn_point
 		
 	def make_accessible(self):
 		self._accessible = True
@@ -55,7 +63,7 @@ class tile:
 class field:
 	def __init__(self, n, m, spawn_points, targets):
 		self._size = (n,m)
-		self._tiles = { (i,j) : tile((i,j)) for i in range(n) for j in range(m) }
+		self._tiles = { (i,j) : tile((i,j), (i,j) in spawn_points.values(), (i,j) in targets) for i in range(n) for j in range(m) }
 		self.spawn_points = spawn_points #dict of spawn ponits (id: position)
 		self.targets = targets #list of positions
 
