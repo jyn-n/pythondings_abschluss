@@ -31,7 +31,6 @@ class main_window ( window_base_class, ui_main_window ):
 		self.input.ignore_keys ( Qt.Key_QuoteLeft )
 		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
 
-
 #		self.level_load.setFocus()
 #		self.level_load.add_completion_items ( tuple ( f.stem for f in Path(level_directory) if f.is_file() ) )
 
@@ -80,6 +79,9 @@ class main_window ( window_base_class, ui_main_window ):
 				i += 1
 
 	def init_gamestate (self, gamestate):
+		self.pause_button.setText('Pause')
+		self.pause_button.setEnabled(True)
+
 		self.board.update_gamestate(gamestate)
 		self.update_gamestate ( gamestate )
 
@@ -175,3 +177,15 @@ class main_window ( window_base_class, ui_main_window ):
 			return main_window.load_directory (f)
 		if f.is_file():
 			return QtGui.QImage (f.as_posix())
+
+	def end_game (self):
+		self._timer.stop()
+		self.pause_button.setEnabled (False)
+
+	def win (self):
+		self.pause_button.setText('you win')
+		self.end_game()
+
+	def lose (self):
+		self.pause_button.setText('you lose')
+		self.end_game()

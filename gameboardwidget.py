@@ -83,6 +83,7 @@ class GameBoardWidget (QtGui.QWidget):
 
 	def paintEvent ( self, event ):
 		super().paintEvent(event)
+		if self._gamestate == None: return
 		painter = QtGui.QPainter ( self )
 		self.paint_board (painter)
 		self.paint_attackers (painter)

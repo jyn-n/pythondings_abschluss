@@ -16,9 +16,9 @@ take_damage = "take_damage" #id of the attacker, amount of damage
 fire_tower = "fire_tower" #position
 fire_all = "fire_all" #
 tick = "tick" #
-loose = "loose" 
+lose = "lose" 
 win = "win"
-loose_life = "loose_life" #amount of lifes
+lose_life = "lose_life" #amount of lifes
 get_money = "get_money" #amount of money
-loose_money = "loose_money" #amount of money
+lose_money = "lose_money" #amount of money
 

@@ -51,7 +51,7 @@ class game:
 			if not self.update_paths():
 				self.field[pos[0], pos[1]].delete_tower()
 			else:
-				self.event(events.loose_money, self.tower_type[tower].money)
+				self.event(events.lose_money, self.tower_type[tower].money)
 
 		
 	def spawn_wave(self, wave):
@@ -81,7 +81,7 @@ class game:
 			for x in self.field.targets:
 				if self.attacker[i].position == x:
 					self.event(events.die, i)
-					self.event(events.loose_life, 1)
+					self.event(events.lose_life, 1)
 				
 	def move_all(self):
 		all_att = self.attacker.copy()
@@ -141,10 +141,10 @@ class game:
 				self.field[x[0],x[1]].get_tower().tick()
 		return copy.deepcopy(self)
 		
-	def loose_life(self, amount):
+	def lose_life(self, amount):
 		self.life -= amount
 		if self.life <= 0:
-			self.event(events.loose)
+			self.event(events.lose)
 			
 	def has_won(self):
 		x = (len(self.attacker) == 0)
@@ -196,7 +196,7 @@ class game:
 	def get_money(self, x):
 		self.money += x
 		
-	def loose_money(self, x):
+	def lose_money(self, x):
 		self.money -= x
 			
 		
