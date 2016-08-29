@@ -70,7 +70,7 @@ class GameBoardWidget (QtGui.QWidget):
 		return tuple(x * sx / constants.distance + sx / 2 for (x,sx) in zip ( exact_position, self.tile_size_pixels() ) )
 
 	def attacker_rect ( self, attacker, position_pixels ):
-		ratio = 4
+		ratio = 3
 		return QtCore.QRect (*(tuple(v - dv // ratio for (v,dv) in zip ( position_pixels , self.tile_size_pixels() )) + tuple((v // ratio) * 2 for v in self.tile_size_pixels())))
 
 	def paint_attacker ( self, painter, attacker ):
