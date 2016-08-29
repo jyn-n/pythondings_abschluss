@@ -53,10 +53,6 @@ r ( events.lose_money, g.lose_money)
 
 del r
 
-#testing stuff
-
-#e ( events.load_level, "demo_level" )
-
 #create main window
 app = QtGui.QApplication(sys.argv)
 mw = main_window(event_callback = e, interval = 20)

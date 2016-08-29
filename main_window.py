@@ -31,9 +31,6 @@ class main_window ( window_base_class, ui_main_window ):
 		self.input.ignore_keys ( Qt.Key_QuoteLeft )
 		self.input.add_completion_items ( tuple (getattr(events, e) for e in dir(events) if not e.startswith('__')) )
 
-#		self.level_load.setFocus()
-#		self.level_load.add_completion_items ( tuple ( f.stem for f in Path(level_directory) if f.is_file() ) )
-
 		self.load_images ( Path ( image_path ) )
 
 		if gamestate != None:
