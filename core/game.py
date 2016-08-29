@@ -46,6 +46,10 @@ class game:
 		for x in self.attacker:
 			if self.attacker[x].position == pos:
 				atpl = False
+			if self.attacker[x].progress >= 0.5 * constants.distance:
+				p = self.attacker[x].position
+				if (self.field[p[0],p[1]].next_tile[0] + p[0], self.field[p[0],p[1]].next_tile[1] + p[1]) == pos:
+					atpl = False
 		if self.field[pos[0], pos[1]].is_buildable() and atpl and self.money >= self.tower_type[tower].money and not pos in self.field.targets:
 			self.field[pos[0], pos[1]].add_tower(self.tower_type[tower])
 			if not self.update_paths():
